@@ -89,7 +89,7 @@ public class CommandLineCore : MonoBehaviour {
         else
         {
             PrintOnCLI("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'.");
-            PrintOnCLI("Core Commands: help, modules, hide (or close), exit, clear");
+            PrintOnCLI("Core Commands: help (or h), modules (or m), hide (or close), exit, clear");
         }
     }
 

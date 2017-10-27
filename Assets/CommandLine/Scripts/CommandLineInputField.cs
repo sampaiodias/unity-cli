@@ -8,7 +8,7 @@ public class CommandLineInputField : MonoBehaviour {
     public InputField inputField;
     public CommandLineCore cliCore;
     public EventSystem myEventSystem;
-    public ScrollRect scroll; //Test
+    public ScrollRect scroll;
     public Text output;
     private List<string> previousCommands;
     int commandPos = -1;
