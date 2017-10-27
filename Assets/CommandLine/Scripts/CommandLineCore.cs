@@ -101,6 +101,7 @@ public class CommandLineCore : MonoBehaviour {
             if (moduleNames[i] == moduleName)
             {
                 commandLineModules[i].SendMessage(command);
+                i = commandLineModules.Length;
             }
         }
     }
@@ -112,6 +113,7 @@ public class CommandLineCore : MonoBehaviour {
             if (moduleNames[i] == moduleName)
             {
                 commandLineModules[i].SendMessage(command, args);
+                i = commandLineModules.Length;
             }
         }
     }
