@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
 
@@ -8,6 +9,11 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
         {
             case "timescale":
                 TimeScale(args[2]);
+                break;
+            case "slowmo":
+            case "slomo":
+            case "slowmotion":
+                SlowMo(args[2], args[3]);
                 break;
             case "help":
             case "h":
@@ -25,5 +31,18 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
     {
         Time.timeScale = float.Parse(amount);
         Debug.Log("TimeScale set to " + Time.timeScale);
+    }
+
+    public void SlowMo(string amount, string duration)
+    {
+        StartCoroutine(ActivateSlowMo(float.Parse(amount), float.Parse(duration)));
+    }
+
+    IEnumerator ActivateSlowMo(float amount, float duration)
+    {
+        float previousTimeScale = Time.timeScale;
+        Time.timeScale = amount;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = previousTimeScale;
     }
 }
