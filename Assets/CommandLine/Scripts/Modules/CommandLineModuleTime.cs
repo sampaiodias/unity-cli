@@ -9,7 +9,8 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
             case "timescale":
                 TimeScale(args[2]);
                 break;
-            default:
+            case "help":
+            case "h":
                 Help();
                 break;
         }

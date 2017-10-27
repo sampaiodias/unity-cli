@@ -21,7 +21,8 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
             case "reloadscene":
                 ReloadScene();
                 break;
-            default:
+            case "help":
+            case "h":
                 Help();
                 break;
         }

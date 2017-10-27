@@ -53,7 +53,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Wecome to CLI! Enter 'help <nameOfTheModule>' to see what each module can do.");
+            Debug.Log("Welcome to CLI! Enter 'help <nameOfTheModule>' to see what each module can do.");
             Debug.Log("To list all modules available, enter 'm' or 'modules'");
         }
     }

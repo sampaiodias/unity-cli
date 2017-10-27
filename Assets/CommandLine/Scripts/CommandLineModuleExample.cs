@@ -9,7 +9,8 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
             case "dosomething":
                 Debug.Log("This module is doing something");
                 break;
-            default:
+            case "help":
+            case "h":
                 Help();
                 break;
         }
