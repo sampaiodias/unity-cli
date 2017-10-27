@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class CommandLineCore : MonoBehaviour {
 
-    public GameObject CLIModules;
+    public bool destroyWhenOtherSceneIsLoaded = false;
+    private GameObject modulesParent;
+    private GameObject inputField;
     private GameObject[] commandLineModules;
     private List<CommandLineModuleSettings> moduleSettings;
     private List<string> moduleNames = new List<string>();
@@ -13,6 +15,18 @@ public class CommandLineCore : MonoBehaviour {
     private void Start()
     {
         InitiateModules();
+        if (destroyWhenOtherSceneIsLoaded)
+        {
+            DontDestroyOnLoad(gameObject);
+        }        
+    }
+
+    private void Update()
+    {
+        if (!inputField.activeSelf && Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            inputField.SetActive(true);
+        }
     }
 
     public void RunCommand(string[] args)
@@ -26,6 +40,10 @@ public class CommandLineCore : MonoBehaviour {
         else if (firstArg == "modules" || firstArg == "m")
         {
             ShowModulesLoaded();
+        }
+        else if (firstArg == "hide" || firstArg == "close")
+        {
+            inputField.SetActive(false);
         }
         //Send a command to the Execute() of a specific module. Example: "Time Help"
         else if (args.Length > 1 && moduleNames.Contains(firstArg)) 
@@ -124,9 +142,12 @@ public class CommandLineCore : MonoBehaviour {
         commandLineModules = new GameObject[modules.Length];
         moduleSettings = new List<CommandLineModuleSettings>();
 
+        modulesParent = transform.Find("Modules").gameObject;
+        inputField = transform.Find("InputField").gameObject;
+
         for (int i = 0; i < modules.Length; i++)
         {
-            commandLineModules[i] = (GameObject)Instantiate(modules[i], CLIModules.transform);
+            commandLineModules[i] = (GameObject)Instantiate(modules[i], modulesParent.transform);
         }
 
         for (int i = 0; i < commandLineModules.Length; i++)
