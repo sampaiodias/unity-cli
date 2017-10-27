@@ -46,6 +46,6 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Commands: call string:methodName string:gameObjectName; callByTag string:methodName string:gameObjectTag; callAll string:methodName; \ndestroy string:gameObjectName; destroytag string:gameObjectsTag");
+        CommandLineCore.PrintOnCLI("call string:methodName string:gameObjectName\ncallByTag string:methodName string:gameObjectTag\ncallAll string:methodName\ndestroy string:gameObjectName\ndestroytag string:gameObjectsTag");
     }
 }

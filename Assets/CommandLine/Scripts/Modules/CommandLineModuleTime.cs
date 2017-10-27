@@ -24,13 +24,13 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Commands: timescale float:amount; slowmo float:amount float:duration");
+        CommandLineCore.PrintOnCLI("timescale float:amount\nslowmo float:amount float:duration");
     }
 
     public void TimeScale(string amount)
     {
         Time.timeScale = float.Parse(amount);
-        Debug.Log("TimeScale set to " + Time.timeScale);
+        CommandLineCore.PrintOnCLI("TimeScale set to " + Time.timeScale);
     }
 
     public void SlowMo(string amount, string duration)

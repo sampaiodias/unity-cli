@@ -8,6 +8,8 @@ public class CommandLineInputField : MonoBehaviour {
     public InputField inputField;
     public CommandLineCore cliCore;
     public EventSystem myEventSystem;
+    public ScrollRect scroll; //Test
+    public Text output;
     private List<string> previousCommands;
     int commandPos = -1;
 
@@ -80,6 +82,7 @@ public class CommandLineInputField : MonoBehaviour {
         if (inputField.text != "")
         {
             SaveCommand(inputField.text);
+            PrintInputOnView(inputField.text);
 
             string[] args = inputField.text.Split(' ');
 
@@ -92,5 +95,20 @@ public class CommandLineInputField : MonoBehaviour {
     {
         previousCommands.Add(fullCommand);
         commandPos = previousCommands.Count;
+    }
+
+    private void PrintInputOnView(string message)
+    {
+        output.text = output.text + "\n> " + message;
+    }
+
+    public void PrintOutputOnView(string message)
+    {
+        output.text = output.text + "\n" + message + "\n";
+    }
+
+    public void Clear()
+    {
+        output.text = "";
     }
 }

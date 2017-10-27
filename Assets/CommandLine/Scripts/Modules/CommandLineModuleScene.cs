@@ -30,7 +30,7 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Commands: loadscene int:sceneIndex; reloadscene");
+        CommandLineCore.PrintOnCLI("loadscene int:sceneIndex\nreloadscene");
     }
 
     public void ReloadScene()

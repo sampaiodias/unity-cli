@@ -21,6 +21,6 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Commands: dosomething string:messageToPrint, dosomethingelse");
+        CommandLineCore.PrintOnCLI("dosomething string:messageToPrint\ndosomethingelse");
     }
 }

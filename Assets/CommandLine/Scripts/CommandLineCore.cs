@@ -6,6 +6,7 @@ using UnityEngine;
 public class CommandLineCore : MonoBehaviour {
 
     public bool destroyWhenOtherSceneIsLoaded = false;
+    public bool startHidden = true;
     private GameObject modulesParent;
     private GameObject inputField;
     private GameObject[] commandLineModules;
@@ -18,7 +19,11 @@ public class CommandLineCore : MonoBehaviour {
         if (destroyWhenOtherSceneIsLoaded)
         {
             DontDestroyOnLoad(gameObject);
-        }        
+        }
+        if (startHidden)
+        {
+            inputField.SetActive(false);
+        }
     }
 
     private void Update()
@@ -45,12 +50,23 @@ public class CommandLineCore : MonoBehaviour {
         {
             inputField.SetActive(false);
         }
+        else if (firstArg == "exit")
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;        
+#endif
+            Application.Quit();
+        }
+        else if (firstArg == "clear")
+        {
+            inputField.GetComponent<CommandLineInputField>().Clear();
+        }
         //Send a command to the Execute() of a specific module. Example: "Time Help"
         else if (args.Length > 1 && moduleNames.Contains(firstArg)) 
         {
             SendCommandTo(firstArg, "Execute", args);
         }
-        //Send a command to the Execute() of ALL modules. Example: "TimeScale 0"
+        //Send a command to the Execute() of ALL modules. Example: "TimeScale 0".
         else
         {
             SendCommandToAllModules("Execute", args);
@@ -66,12 +82,13 @@ public class CommandLineCore : MonoBehaviour {
                 if (moduleNames.Contains(args[1].ToLower()))
                 {
                     SendCommandTo(args[1].ToLower(), "Help");
+                    i = commandLineModules.Length;
                 }                
             }
         }
         else
         {
-            Debug.Log("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'");
+            PrintOnCLI("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'");
         }
     }
 
@@ -93,7 +110,7 @@ public class CommandLineCore : MonoBehaviour {
             }
         }
 
-        Debug.Log("Modules loaded: " + builder.ToString());
+        PrintOnCLI("Modules loaded: " + builder.ToString());
     }
 
     public void SendCommandToAllModules(string command, string[] args)
@@ -155,5 +172,10 @@ public class CommandLineCore : MonoBehaviour {
             moduleSettings.Add(commandLineModules[i].GetComponent<CommandLineModuleSettings>());
             moduleNames.Add(moduleSettings[i].moduleName.ToLower());
         }
+    }
+
+    public static void PrintOnCLI(string message)
+    {
+        GameObject.Find("InputField").GetComponent<CommandLineInputField>().PrintOutputOnView(message);
     }
 }
