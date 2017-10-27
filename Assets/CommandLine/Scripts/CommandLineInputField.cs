@@ -27,12 +27,37 @@ public class CommandLineInputField : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            commandPos++;
-            //inputField.text = previousCommands[commandPos];
+            commandPos--;
+            try
+            {
+                inputField.text = previousCommands[Mathf.Clamp(commandPos, 0, previousCommands.Count - 1)];
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("Show next command");
+            commandPos++;
+
+            if (commandPos > previousCommands.Count - 1)
+            {
+                commandPos = previousCommands.Count;
+                inputField.text = "";
+            }
+            else
+            {
+                try
+                {
+                    inputField.text = previousCommands[Mathf.Clamp(commandPos, 0, previousCommands.Count - 1)];
+                }
+                catch (System.Exception)
+                {
+                    throw;
+                }
+            }
+            
         }
     }
 
@@ -52,6 +77,6 @@ public class CommandLineInputField : MonoBehaviour {
     private void SaveCommand(string fullCommand)
     {
         previousCommands.Add(fullCommand);
-        commandPos = -1;
+        commandPos = previousCommands.Count;
     }
 }

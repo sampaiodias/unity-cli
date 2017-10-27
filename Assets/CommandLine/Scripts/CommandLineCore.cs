@@ -45,7 +45,10 @@ public class CommandLineCore : MonoBehaviour {
         {
             for (int i = 0; i < commandLineModules.Length; i++)
             {
-                SendCommandTo(args[1], "Help");
+                if (moduleNames.Contains(args[1].ToLower()))
+                {
+                    SendCommandTo(args[1].ToLower(), "Help");
+                }                
             }
         }
         else
