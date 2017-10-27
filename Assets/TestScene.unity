@@ -108,13 +108,28 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &326302477
+--- !u!1001 &21414971
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 224178259469076286, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.8377801
+      objectReference: {fileID: 0}
+    - target: {fileID: 224178259469076286, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224178259469076286, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224591002428001552, guid: 2094290b25f1a49498406392a0d1021b,
         type: 2}
       propertyPath: m_LocalPosition.x

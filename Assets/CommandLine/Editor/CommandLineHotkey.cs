@@ -16,7 +16,15 @@ public class CommandLineHotkey : ScriptableObject {
         {
             try
             {
-                Destroy(cli);
+                if (EditorApplication.isPlaying)
+                {
+                    Destroy(cli);
+                }
+                else
+                {
+                    DestroyImmediate(cli);
+                }
+                
                 cli = null;
             }
             catch (System.Exception)

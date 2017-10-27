@@ -66,7 +66,7 @@ public class CommandLineCore : MonoBehaviour {
         {
             SendCommandTo(firstArg, "Execute", args);
         }
-        //Send a command to the Execute() of ALL modules. Example: "TimeScale 0".
+        //Send a command to the Execute() of ALL modules. Example: "TimeScale 0"
         else
         {
             SendCommandToAllModules("Execute", args);
@@ -88,7 +88,8 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            PrintOnCLI("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'");
+            PrintOnCLI("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'.");
+            PrintOnCLI("Core Commands: help, modules, hide (or close), exit, clear");
         }
     }
 
