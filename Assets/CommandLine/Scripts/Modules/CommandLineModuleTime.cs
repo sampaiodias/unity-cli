@@ -24,7 +24,7 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Time module help message");
+        Debug.Log("Commands: timescale float:amount; slowmo float:amount float:duration");
     }
 
     public void TimeScale(string amount)

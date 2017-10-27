@@ -7,7 +7,10 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
         switch (args[1].ToLower())
         {
             case "dosomething":
-                Debug.Log("This module is doing something");
+                Debug.Log("This module is printing " + args[1]);
+                break;
+            case "dosomethingelse":
+                Debug.Log("This module is printing " + args[1]);
                 break;
             case "help":
             case "h":
@@ -18,6 +21,6 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("This is the help message for this module");
+        Debug.Log("Commands: dosomething string:messageToPrint, dosomethingelse");
     }
 }

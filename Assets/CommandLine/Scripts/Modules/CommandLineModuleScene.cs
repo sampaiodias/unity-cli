@@ -30,7 +30,7 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Scene module help message not implemented :(");
+        Debug.Log("Commands: loadscene int:sceneIndex; reloadscene");
     }
 
     public void ReloadScene()
