@@ -5,7 +5,7 @@ public class CommandLineHotkey : ScriptableObject {
 
     static GameObject cli;
 
-	[MenuItem("Window/Command Line/Create CLI #_0")]
+	[MenuItem("Window/Command Line/Create CLI #%_0")]
     static void OpenCLI()
     {
         if (cli == null)

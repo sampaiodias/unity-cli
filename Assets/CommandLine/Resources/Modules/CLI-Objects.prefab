@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114466106739808740}
   - component: {fileID: 114198465827950010}
   m_Layer: 5
-  m_Name: CLI-SendMessage
+  m_Name: CLI-Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b760154837dda794b8a6b0e535d216c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moduleName: SM
+  moduleName: Obj
 --- !u!224 &224114110448114518
 RectTransform:
   m_ObjectHideFlags: 1

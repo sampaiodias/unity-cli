@@ -19,6 +19,12 @@ public class CommandLineInputField : MonoBehaviour {
             myEventSystem.gameObject.SetActive(true);
         }
 
+        inputField.onEndEdit.AddListener(val =>
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+                SendCommandToCore();
+        });
+
         previousCommands = new List<string>();
     }
 
@@ -28,9 +34,17 @@ public class CommandLineInputField : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             commandPos--;
+            if (commandPos < 0)
+            {
+                commandPos = 0;
+            }
+
             try
             {
-                inputField.text = previousCommands[Mathf.Clamp(commandPos, 0, previousCommands.Count - 1)];
+                if (previousCommands.Count > 0)
+                {
+                    inputField.text = previousCommands[Mathf.Clamp(commandPos, 0, previousCommands.Count - 1)];
+                }                
             }
             catch (System.Exception)
             {

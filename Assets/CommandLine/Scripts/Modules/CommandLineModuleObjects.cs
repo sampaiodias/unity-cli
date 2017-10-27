@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CommandLineModuleSendMessage : MonoBehaviour, ICommandLineModule {
+public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
     public void Execute(string[] args)
     {
@@ -23,9 +23,19 @@ public class CommandLineModuleSendMessage : MonoBehaviour, ICommandLineModule {
                 GameObject obj = GameObject.Find(args[3]);
                 obj.SendMessage(args[2]);
                 break;
-            case "callTag":
+            case "calltag":
                 GameObject objTag = GameObject.FindGameObjectWithTag(args[3]);
                 objTag.SendMessage(args[2]);
+                break;
+            case "destroy":
+                Destroy(GameObject.Find(args[2]));               
+                break;
+            case "destroytag":
+                GameObject[] objsTag = (GameObject.FindGameObjectsWithTag(args[2]));
+                foreach (var item in objsTag)
+                {
+                    Destroy(item);
+                }
                 break;
             case "help":
             case "h":
@@ -36,6 +46,6 @@ public class CommandLineModuleSendMessage : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        Debug.Log("Commands: call string:methodName string:gameObjectName; callByTag string:methodName string:gameObjectTag; callAll string:methodName");
+        Debug.Log("Commands: call string:methodName string:gameObjectName; callByTag string:methodName string:gameObjectTag; callAll string:methodName; \ndestroy string:gameObjectName; destroytag string:gameObjectsTag");
     }
 }

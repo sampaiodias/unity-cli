@@ -115,6 +115,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114690385601057026, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224591002428001552, guid: 2094290b25f1a49498406392a0d1021b,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -209,9 +214,40 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114690385601057026, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 577608496}
+    - target: {fileID: 114690385601057026, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendCommandToCore
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690385601057026, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690385601057026, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690385601057026, guid: 2094290b25f1a49498406392a0d1021b,
+        type: 2}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2094290b25f1a49498406392a0d1021b, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &577608496 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114205923561832524, guid: 2094290b25f1a49498406392a0d1021b,
+    type: 2}
+  m_PrefabInternal: {fileID: 131878976}
+  m_Script: {fileID: 11500000, guid: 99c7891f2418fec4aa872b3b65d2b367, type: 3}
 --- !u!1 &1399508104
 GameObject:
   m_ObjectHideFlags: 0
