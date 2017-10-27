@@ -5,7 +5,7 @@ public class CommandLineHotkey : ScriptableObject {
 
     static GameObject cli;
 
-	[MenuItem("Window/Command Line/Create CLI #%_0")]
+	[MenuItem("Window/Command Line/Create CLI &0")]
     static void OpenCLI()
     {
         if (cli == null)
@@ -14,8 +14,15 @@ public class CommandLineHotkey : ScriptableObject {
         }
         else
         {
-            Destroy(cli);
-            cli = null;
+            try
+            {
+                Destroy(cli);
+                cli = null;
+            }
+            catch (System.Exception)
+            {
+            }
+            
         }
     }
 }
