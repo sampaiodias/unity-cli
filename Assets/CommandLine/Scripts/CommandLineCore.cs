@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class CommandLineCore : MonoBehaviour {
 
-    public bool destroyWhenOtherSceneIsLoaded = false;
+    [Header("Basic Settings")]
+    public string openWindowHotkey = "]";
     public bool startHidden = true;
+    [Header("Advanced Settings")]
+    [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
+    public bool destroyWhenOtherSceneIsLoaded = false;
+
     private GameObject modulesParent;
     private GameObject inputField;
     private GameObject[] commandLineModules;
@@ -28,7 +33,7 @@ public class CommandLineCore : MonoBehaviour {
 
     private void Update()
     {
-        if (!inputField.activeSelf && Input.GetKeyDown(KeyCode.RightBracket))
+        if (!inputField.activeSelf && Input.GetKeyDown(openWindowHotkey))
         {
             inputField.SetActive(true);
         }
@@ -88,8 +93,8 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            PrintOnCLI("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'.");
-            PrintOnCLI("Core Commands: help (or h), modules (or m), hide (or close), exit, clear");
+            PrintOnCLIU("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'.");
+            PrintOnCLIU("Core Commands: help (or h), modules (or m), hide (or close), exit, clear");
         }
     }
 
@@ -111,7 +116,7 @@ public class CommandLineCore : MonoBehaviour {
             }
         }
 
-        PrintOnCLI("Modules loaded: " + builder.ToString());
+        PrintOnCLIU("Modules loaded: " + builder.ToString());
     }
 
     public void SendCommandToAllModules(string command, string[] args)
@@ -160,8 +165,8 @@ public class CommandLineCore : MonoBehaviour {
         commandLineModules = new GameObject[modules.Length];
         moduleSettings = new List<CommandLineModuleSettings>();
 
-        modulesParent = transform.Find("Modules").gameObject;
-        inputField = transform.Find("InputField").gameObject;
+        modulesParent = transform.Find("CLIU-Modules").gameObject;
+        inputField = transform.Find("CLIU-InputField").gameObject;
 
         for (int i = 0; i < modules.Length; i++)
         {
@@ -175,8 +180,8 @@ public class CommandLineCore : MonoBehaviour {
         }
     }
 
-    public static void PrintOnCLI(string message)
+    public static void PrintOnCLIU(string message)
     {
-        GameObject.Find("InputField").GetComponent<CommandLineInputField>().PrintOutputOnView(message);
+        GameObject.Find("CLIU-InputField").GetComponent<CommandLineInputField>().PrintOutputOnView(message);
     }
 }

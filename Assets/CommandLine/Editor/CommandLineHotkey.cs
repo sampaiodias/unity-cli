@@ -3,14 +3,14 @@ using UnityEditor;
 
 public class CommandLineHotkey : ScriptableObject {
 
-    static GameObject cli;
+    static GameObject cliuWindow;
 
-	[MenuItem("Window/Command Line/Instantiate or Destroy CLI &0")]
-    static void OpenCLI()
+	[MenuItem("Window/Command Line/Instantiate or Destroy CLIU &0")]
+    static void OpenCLIU()
     {
-        if (cli == null)
+        if (cliuWindow == null)
         {
-            cli = Instantiate(Resources.Load("CLI")) as GameObject;
+            cliuWindow = Instantiate(Resources.Load("CLIU")) as GameObject;
         }
         else
         {
@@ -18,14 +18,14 @@ public class CommandLineHotkey : ScriptableObject {
             {
                 if (EditorApplication.isPlaying)
                 {
-                    Destroy(cli);
+                    Destroy(cliuWindow);
                 }
                 else
                 {
-                    DestroyImmediate(cli);
+                    DestroyImmediate(cliuWindow);
                 }
                 
-                cli = null;
+                cliuWindow = null;
             }
             catch (System.Exception)
             {

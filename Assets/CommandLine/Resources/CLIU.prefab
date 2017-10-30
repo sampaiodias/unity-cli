@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 114690385601057026}
   - component: {fileID: 114205923561832524}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: CLIU-InputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224739096569849012}
   m_Layer: 5
-  m_Name: Modules
+  m_Name: CLIU-Modules
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 114174458090667034}
   - component: {fileID: 114323117001406808}
   m_Layer: 5
-  m_Name: CLI
+  m_Name: CLIU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "<b>CLI - Command Line Interface for Unity - by Lucas Sampaio Dias</b>\n "
+  m_Text: "<b>CLIU - Command Line Interface for Unity (by Lucas Sampaio Dias)</b>\n "
 --- !u!114 &114151727312129204
 MonoBehaviour:
   m_ObjectHideFlags: 1
