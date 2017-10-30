@@ -184,4 +184,24 @@ public class CommandLineCore : MonoBehaviour {
     {
         GameObject.Find("CLIU-InputField").GetComponent<CommandLineInputField>().PrintOutputOnView(message);
     }
+
+    public static void PrintColoredOnCLIU(string message, string colorTag)
+    {
+        GameObject.Find("CLIU-InputField").GetComponent<CommandLineInputField>().PrintColoredOutputOnView(message, colorTag);
+    }
+
+    public static void PrintErrorOutputOnView(string message)
+    {
+        PrintColoredOnCLIU(message, "#ff0000ff");
+    }
+
+    public static void PrintWarningOutputOnView(string message)
+    {
+        PrintColoredOnCLIU(message, "#ffff00ff");
+    }
+
+    public static void PrintSuccessOutputOnView(string message)
+    {
+        PrintColoredOnCLIU(message, "#008000ff");
+    }
 }

@@ -112,21 +112,6 @@ public class CommandLineInputField : MonoBehaviour {
         output.text = output.text + "\n<color=" + colorTag + ">" + message + "</color>\n";
     }
 
-    public void PrintErrorOutputOnView(string message)
-    {
-        PrintColoredOutputOnView(message, "#ff0000ff");
-    }
-
-    public void PrintWarningOutputOnView(string message)
-    {
-        PrintColoredOutputOnView(message, "#ffff00ff");
-    }
-
-    public void PrintSuccessOutputOnView(string message)
-    {
-        PrintColoredOutputOnView(message, "#008000ff");
-    }
-
     public void Clear()
     {
         output.text = "";
