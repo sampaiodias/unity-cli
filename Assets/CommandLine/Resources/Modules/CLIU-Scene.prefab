@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b760154837dda794b8a6b0e535d216c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moduleName: Scene
+  moduleInternalCode: scene
 --- !u!224 &224244738552121412
 RectTransform:
   m_ObjectHideFlags: 1

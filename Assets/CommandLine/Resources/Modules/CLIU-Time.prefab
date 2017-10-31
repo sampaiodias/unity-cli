@@ -36,7 +36,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1719849726545182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85397da080de9ba4e8ba25fab09ba501, type: 3}
+  m_Script: {fileID: 11500000, guid: 4296650e693895148ab147cc71a038ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114821090332783642
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b760154837dda794b8a6b0e535d216c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moduleName: Time
+  moduleInternalCode: time
 --- !u!224 &224968664515159370
 RectTransform:
   m_ObjectHideFlags: 1
