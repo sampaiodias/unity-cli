@@ -23,6 +23,7 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
                 break;
             case "help":
             case "h":
+            case "-h":
                 Help();
                 break;
         }

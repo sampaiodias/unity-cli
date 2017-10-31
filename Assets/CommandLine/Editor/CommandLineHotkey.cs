@@ -5,7 +5,7 @@ public class CommandLineHotkey : ScriptableObject {
 
     static GameObject cliuWindow;
 
-	[MenuItem("Window/Command Line/Instantiate or Destroy CLIU &0")]
+	[MenuItem("Window/CLIU/Instantiate or Destroy CLIU &0")]
     static void OpenCLIU()
     {
         if (cliuWindow == null)

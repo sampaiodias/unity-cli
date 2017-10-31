@@ -35,7 +35,7 @@ public class CommandLineCore : MonoBehaviour {
     {
         string firstArg = args[0].ToLower();
 
-        if(firstArg == "help" || firstArg == "h")
+        if(firstArg == "help" || firstArg == "h" || firstArg == "-h")
         {
             ShowHelp(args);            
         }
@@ -169,7 +169,7 @@ public class CommandLineCore : MonoBehaviour {
         for (int i = 0; i < commandLineModules.Length; i++)
         {
             moduleSettings.Add(commandLineModules[i].GetComponent<CommandLineModuleSettings>());
-            moduleNames.Add(moduleSettings[i].moduleName.ToLower());
+            moduleNames.Add(moduleSettings[i].moduleInternalCode.ToLower());
         }
     }
 

@@ -14,6 +14,7 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
                 break;
             case "help":
             case "h":
+            case "-h":
                 Help();
                 break;
         }

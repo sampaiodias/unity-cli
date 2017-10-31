@@ -39,6 +39,7 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
                 break;
             case "help":
             case "h":
+            case "-h":
                 Help();
                 break;
         }
@@ -46,6 +47,6 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.PrintOnCLIU("call string:methodName string:gameObjectName\ncallByTag string:methodName string:gameObjectTag\ncallAll string:methodName\ndestroy string:gameObjectName\ndestroytag string:gameObjectsTag");
+        CommandLineCore.PrintOnCLIU("call string:methodName string:gameObjectName\ncallByTag string:methodName string:gameObjectTag\ncallAll string:methodName\ndestroy string:gameObjectName\ndestroyTag string:gameObjectsTag");
     }
 }

@@ -17,6 +17,7 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
                 break;
             case "help":
             case "h":
+            case "-h":
                 Help();
                 break;
         }
