@@ -8,6 +8,7 @@ public class CommandLineCore : MonoBehaviour {
     [Header("Basic Settings")]
     public string openWindowHotkey = "]";
     public bool startHidden = true;
+    public bool hideOpenWindowButton = false;
     [Header("Advanced Settings")]
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
     public bool destroyWhenOtherSceneIsLoaded = false;
@@ -17,26 +18,17 @@ public class CommandLineCore : MonoBehaviour {
     private GameObject[] commandLineModules;
     private List<CommandLineModuleSettings> moduleSettings;
     private List<string> moduleNames = new List<string>();
+    private GameObject buttonOpenWindow;
+    private CommandLineWindowManager windowManager;
 
     private void Start()
     {
-        InitiateModules();
-        if (destroyWhenOtherSceneIsLoaded)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-        if (startHidden)
-        {
-            inputField.SetActive(false);
-        }
-    }
+        buttonOpenWindow = GameObject.Find("CLIU-OpenCLIUButton");
+        windowManager = FindObjectOfType<CommandLineWindowManager>();
 
-    private void Update()
-    {
-        if (!inputField.activeSelf && Input.GetKeyDown(openWindowHotkey))
-        {
-            inputField.SetActive(true);
-        }
+        InitiateModules();
+
+        SettingBasedProcedures();
     }
 
     public void RunCommand(string[] args)
@@ -53,7 +45,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else if (firstArg == "hide" || firstArg == "close")
         {
-            inputField.SetActive(false);
+            windowManager.CloseCLIUWindow();
         }
         else if (firstArg == "exit")
         {
@@ -66,6 +58,7 @@ public class CommandLineCore : MonoBehaviour {
         {
             inputField.GetComponent<CommandLineInputField>().Clear();
         }
+
         //Send a command to the Execute() of a specific module. Example: "Time Help"
         else if (args.Length > 1 && moduleNames.Contains(firstArg)) 
         {
@@ -177,6 +170,26 @@ public class CommandLineCore : MonoBehaviour {
         {
             moduleSettings.Add(commandLineModules[i].GetComponent<CommandLineModuleSettings>());
             moduleNames.Add(moduleSettings[i].moduleName.ToLower());
+        }
+    }
+
+    private void SettingBasedProcedures()
+    {
+        if (destroyWhenOtherSceneIsLoaded)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        if (startHidden)
+        {
+            inputField.SetActive(false);
+            if (hideOpenWindowButton)
+            {
+                buttonOpenWindow.SetActive(false);
+            }
+        }
+        else
+        {
+            buttonOpenWindow.SetActive(false);
         }
     }
 
