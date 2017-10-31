@@ -582,7 +582,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224178259469076286}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.03846154
+  m_Size: 0.038518306
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -685,7 +685,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>CLIU - Command Line Interface for Unity (by Lucas Sampaio Dias)</b>
+  m_Text: <b>CLIU - Command Line Interface for Unity</b>
 --- !u!114 &114205923561832524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1272,8 +1272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2500}
-  m_SizeDelta: {x: -22, y: 5000}
+  m_AnchoredPosition: {x: 0, y: 2496.1653}
+  m_SizeDelta: {x: -22, y: 4992.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224085876149934572
 RectTransform:
@@ -1404,8 +1404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: -20, y: -13}
+  m_AnchoredPosition: {x: -5.58, y: -0.5}
+  m_SizeDelta: {x: -31.15, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224358906435172358
 RectTransform:
@@ -1442,8 +1442,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.300049, y: 0.0000038146973}
-  m_SizeDelta: {x: 20, y: 0}
+  m_AnchoredPosition: {x: -9.300049, y: -14.2}
+  m_SizeDelta: {x: 20, y: 28.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224591002428001552
 RectTransform:

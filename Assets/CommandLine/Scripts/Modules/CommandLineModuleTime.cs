@@ -15,6 +15,9 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
             case "slowmotion":
                 SlowMo(args[2], args[3]);
                 break;
+            case "devicetime":
+                DeviceTime();
+                break;
             case "help":
             case "h":
             case "-h":
@@ -25,7 +28,7 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.PrintOnCLIU("timescale float:amount\nslowmo float:amount float:duration");
+        CommandLineCore.PrintOnCLIU("timescale float:amount\nslowmo float:amount float:duration\ndevicetime");
     }
 
     public void TimeScale(string amount)
@@ -45,5 +48,10 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
         Time.timeScale = amount;
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = previousTimeScale;
+    }
+
+    public void DeviceTime()
+    {
+        CommandLineCore.PrintOnCLIU(System.DateTime.Now.ToString());
     }
 }

@@ -21,6 +21,12 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
             case "reloadscene":
                 ReloadScene();
                 break;
+            case "loadnextscene":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                break;
+            case "loadpreviousscene":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                break;
             case "help":
             case "h":
             case "-h":
@@ -31,7 +37,7 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.PrintOnCLIU("loadscene int:sceneIndex\nreloadscene");
+        CommandLineCore.PrintOnCLIU("loadscene int:sceneIndex\nreloadscene\nloadnextscene\nloadpreviousscene");
     }
 
     public void ReloadScene()

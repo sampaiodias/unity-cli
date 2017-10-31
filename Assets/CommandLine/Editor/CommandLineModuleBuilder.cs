@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
-using System;
 
 public class CommandLineModuleBuilder : EditorWindow {
 
