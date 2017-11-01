@@ -7,6 +7,7 @@ public class CommandLineModuleBuilder : EditorWindow {
     string moduleName = "ModuleName";
     string moduleCode = "example";
     string moduleScriptName = "CommandLineModuleExampleName";
+    Texture2D logo;
 
     [MenuItem("Window/CLIU/Module Builder")]
     public static void OpenModuleBuilder()
@@ -14,9 +15,14 @@ public class CommandLineModuleBuilder : EditorWindow {
         GetWindow<CommandLineModuleBuilder>("Module Builder");
     }
 
+    private void OnEnable()
+    {
+        logo = (Texture2D)Resources.Load("Textures/Logo", typeof(Texture2D));
+    }
+
     void OnGUI()
     {
-        GUILayout.Space(2);
+        GUILayout.Label(logo);
         GUILayout.Label("Prefab Builder", EditorStyles.largeLabel);
         GUILayout.Space(10);
         moduleName = EditorGUILayout.TextField("Module Name:", moduleName);

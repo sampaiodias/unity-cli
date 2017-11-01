@@ -43,7 +43,7 @@ public class CommandLineCore : MonoBehaviour {
     /// <summary>
     /// This is the Core main method. Core interpret args and execute the appropriate operations.
     /// </summary>
-    /// <param name="args"></param>
+    /// <param name="args">Get the command on args[0] and its (optional) parameters on args[1], args[2], and so on. Example: { "call", "PlayerGameObject", "RespawnMethod" } OR { "help", "time" }</param>
     public void RunCommand(string[] args)
     {
         string firstArg = args[0].ToLower();

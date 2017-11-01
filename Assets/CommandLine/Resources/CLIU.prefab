@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222182784781672888}
   - component: {fileID: 114816088293048068}
   m_Layer: 5
-  m_Name: InputPlaceholder
+  m_Name: InputPlaceholderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 222880107082417160}
   - component: {fileID: 114677299356424066}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextOpenCLIU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
