@@ -14,7 +14,8 @@ public class CommandLineCore : MonoBehaviour {
     public bool destroyWhenOtherSceneIsLoaded = false;
 
     private GameObject modulesParent;
-    private GameObject inputField;
+    private GameObject window;
+    private CommandLineInputField inputField;
     private GameObject[] commandLineModules;
     private List<CommandLineModuleSettings> moduleSettings;
     private List<string> moduleNames = new List<string>();
@@ -25,6 +26,7 @@ public class CommandLineCore : MonoBehaviour {
     {
         buttonOpenWindow = GameObject.Find("CLIU-OpenCLIUButton");
         windowManager = FindObjectOfType<CommandLineWindowManager>();
+        inputField = FindObjectOfType<CommandLineInputField>();
 
         InitiateModules();
 
@@ -56,7 +58,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else if (firstArg == "clear")
         {
-            inputField.GetComponent<CommandLineInputField>().Clear();
+            inputField.Clear();
         }
 
         //Send a command to the Execute() of a specific module. Example: "Time Help"
@@ -159,7 +161,7 @@ public class CommandLineCore : MonoBehaviour {
         moduleSettings = new List<CommandLineModuleSettings>();
 
         modulesParent = transform.Find("CLIU-Modules").gameObject;
-        inputField = transform.Find("CLIU-InputField").gameObject;
+        window = GameObject.Find("CLIU-Window").gameObject;
 
         for (int i = 0; i < modules.Length; i++)
         {
@@ -181,7 +183,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         if (startHidden)
         {
-            inputField.SetActive(false);
+            window.SetActive(false);
             if (hideOpenWindowButton)
             {
                 buttonOpenWindow.SetActive(false);

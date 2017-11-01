@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CommandLineWindowManager : MonoBehaviour {
 
-    public GameObject inputField;
+    public GameObject window;
     public CommandLineCore commandLineCore;
     public GameObject buttonOpenWindow;
 	
 	void Update () {
-        if (!inputField.activeSelf && Input.GetKeyDown(commandLineCore.openWindowHotkey))
+        if (!window.activeSelf && Input.GetKeyDown(commandLineCore.openWindowHotkey))
         {
             OpenCLIUWindow();
         }
@@ -17,13 +17,13 @@ public class CommandLineWindowManager : MonoBehaviour {
 
     public void OpenCLIUWindow()
     {
-        inputField.SetActive(true);
+        window.SetActive(true);
         buttonOpenWindow.SetActive(false);
     }
 
     public void CloseCLIUWindow()
     {
-        inputField.SetActive(false);
+        window.SetActive(false);
         if (!commandLineCore.hideOpenWindowButton)
         {
             buttonOpenWindow.SetActive(true);

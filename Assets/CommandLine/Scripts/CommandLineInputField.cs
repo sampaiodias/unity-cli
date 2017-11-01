@@ -12,6 +12,7 @@ public class CommandLineInputField : MonoBehaviour {
     public Text output;
     private List<string> previousCommands;
     int commandPos = -1;
+    bool caretFound = false;
 
     private void Start()
     {
@@ -32,6 +33,15 @@ public class CommandLineInputField : MonoBehaviour {
 
     void Update () {
         inputField.ActivateInputField();
+        if (!caretFound)
+        {
+            GameObject caret = GameObject.Find("CLIU-InputField Input Caret");
+            if (caret != null)
+            {
+                caret.transform.SetSiblingIndex(1);
+                caretFound = true;
+            }            
+        }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
