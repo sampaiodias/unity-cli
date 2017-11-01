@@ -599,7 +599,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224178259469076286}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.03864383
+  m_Size: 0.038643833
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -785,6 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openWindowHotkey: ']'
+  closeWindowHotkey: escape
   startHidden: 1
   hideOpenWindowButton: 0
   draggableWindow: 1

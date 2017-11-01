@@ -6,7 +6,10 @@ using UnityEngine;
 public class CommandLineCore : MonoBehaviour {
 
     [Header("Basic Settings")]
+    [Tooltip("Leave empty if you don't want a hotkey")]
     public string openWindowHotkey = "]";
+    [Tooltip("Leave empty if you don't want a hotkey")]
+    public string closeWindowHotkey = "escape";
     public bool startHidden = true;
     public bool hideOpenWindowButton = false;
     public bool draggableWindow = true;
@@ -37,10 +40,15 @@ public class CommandLineCore : MonoBehaviour {
         SettingBasedProcedures();
     }
 
+    /// <summary>
+    /// This is the Core main method. Core interpret args and execute the appropriate operations.
+    /// </summary>
+    /// <param name="args"></param>
     public void RunCommand(string[] args)
     {
         string firstArg = args[0].ToLower();
 
+        //Search for a match on the Core commands
         if(firstArg == "help" || firstArg == "h" || firstArg == "-h")
         {
             ShowHelp(args);            
@@ -69,18 +77,23 @@ public class CommandLineCore : MonoBehaviour {
             window.transform.position = initPos;
         }
 
-        //Send a command to the Execute() of a specific module. Example: "Time Help"
+        //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
         else if (args.Length > 1 && moduleNames.Contains(firstArg)) 
         {
             SendCommandTo(firstArg, "Execute", args);
         }
-        //Send a command to the Execute() of ALL modules. Example: "TimeScale 0"
+
+        //If everthing above fails, Core sends a command to the Execute() of ALL modules. Example: "timescale 0"
         else
         {
             SendCommandToAllModules("Execute", args);
         }
     }
 
+    /// <summary>
+    /// Call Help() from a specific module or, if the module is not found or specified, the help message of Core.
+    /// </summary>
+    /// <param name="args"></param>
     public void ShowHelp(string[] args)
     {
         if (args.Length > 1)
@@ -101,7 +114,7 @@ public class CommandLineCore : MonoBehaviour {
         }
     }
 
-    public void ShowModulesLoaded()
+    private void ShowModulesLoaded()
     {
         StringBuilder builder = new StringBuilder();
 
@@ -122,7 +135,7 @@ public class CommandLineCore : MonoBehaviour {
         PrintOnCLIU("Modules loaded: " + builder.ToString());
     }
 
-    public void SendCommandToAllModules(string command, string[] args)
+    private void SendCommandToAllModules(string command, string[] args)
     {
         string[] modifiedArgs = new string[args.Length + 1];
 
@@ -138,7 +151,7 @@ public class CommandLineCore : MonoBehaviour {
         }
     }
 
-    public void SendCommandTo(string moduleName, string command)
+    private void SendCommandTo(string moduleName, string command)
     {
         for (int i = 0; i < commandLineModules.Length; i++)
         {
@@ -150,7 +163,7 @@ public class CommandLineCore : MonoBehaviour {
         }
     }
 
-    public void SendCommandTo(string moduleName, string command, string[] args)
+    private void SendCommandTo(string moduleName, string command, string[] args)
     {
         for (int i = 0; i < commandLineModules.Length; i++)
         {
@@ -203,26 +216,47 @@ public class CommandLineCore : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Print a message on the CLIU Window.
+    /// </summary>
+    /// <param name="message"></param>
     public static void PrintOnCLIU(string message)
     {
         GameObject.Find("CLIU-InputField").GetComponent<CommandLineInputField>().PrintOutputOnView(message);
     }
 
+    /// <summary>
+    /// Print a message on the CLIU Window using a specified color.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="colorTag">The color tag for the Rich Text tag. Example: #00800ff</param>
     public static void PrintColoredOnCLIU(string message, string colorTag)
     {
         GameObject.Find("CLIU-InputField").GetComponent<CommandLineInputField>().PrintColoredOutputOnView(message, colorTag);
     }
 
+    /// <summary>
+    /// Print a message on the CLIU Window using a red color.
+    /// </summary>
+    /// <param name="message"></param>
     public static void PrintErrorOutputOnView(string message)
     {
         PrintColoredOnCLIU(message, "#ff0000ff");
     }
 
+    /// <summary>
+    /// Print a message on the CLIU Window using a yellow color.
+    /// </summary>
+    /// <param name="message"></param>
     public static void PrintWarningOutputOnView(string message)
     {
         PrintColoredOnCLIU(message, "#ffff00ff");
     }
 
+    /// <summary>
+    /// Print a message on the CLIU Window using a green color.
+    /// </summary>
+    /// <param name="message"></param>
     public static void PrintSuccessOutputOnView(string message)
     {
         PrintColoredOnCLIU(message, "#008000ff");
