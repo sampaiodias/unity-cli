@@ -29,6 +29,7 @@ public class CommandLineInputField : MonoBehaviour {
         });
 
         previousCommands = new List<string>();
+        cliCore.initPos = transform.parent.position;
     }
 
     void Update () {

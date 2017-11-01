@@ -9,6 +9,7 @@ public class CommandLineCore : MonoBehaviour {
     public string openWindowHotkey = "]";
     public bool startHidden = true;
     public bool hideOpenWindowButton = false;
+    public bool draggableWindow = true;
     [Header("Advanced Settings")]
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
     public bool destroyWhenOtherSceneIsLoaded = false;
@@ -21,6 +22,9 @@ public class CommandLineCore : MonoBehaviour {
     private List<string> moduleNames = new List<string>();
     private GameObject buttonOpenWindow;
     private CommandLineWindowManager windowManager;
+
+    [HideInInspector]
+    public Vector3 initPos;
 
     private void Start()
     {
@@ -60,6 +64,10 @@ public class CommandLineCore : MonoBehaviour {
         {
             inputField.Clear();
         }
+        else if (firstArg == "reset")
+        {
+            window.transform.position = initPos;
+        }
 
         //Send a command to the Execute() of a specific module. Example: "Time Help"
         else if (args.Length > 1 && moduleNames.Contains(firstArg)) 
@@ -88,8 +96,8 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            PrintOnCLIU("Enter 'help nameOfTheModule' to see what each module can do. To list all modules available, enter 'm' or 'modules'.");
-            PrintOnCLIU("Core Commands: help (or h), modules (or m), hide (or close), exit, clear");
+            PrintOnCLIU("Enter 'help codeofthemodule' to see what each module can do. To list all module codes, enter 'm' or 'modules'.");
+            PrintOnCLIU("Core Commands: help (or h), modules (or m), hide (or close), exit, clear, reset");
         }
     }
 
