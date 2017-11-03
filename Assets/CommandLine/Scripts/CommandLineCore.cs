@@ -15,7 +15,7 @@ public class CommandLineCore : MonoBehaviour {
     public bool draggableWindow = true;
     [Header("Advanced Settings")]
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
-    public bool destroyWhenOtherSceneIsLoaded = false;
+    public bool destroyOnSceneLoad = false;
 
     private GameObject modulesParent;
     private GameObject window;
@@ -198,7 +198,7 @@ public class CommandLineCore : MonoBehaviour {
 
     private void SettingBasedProcedures()
     {
-        if (destroyWhenOtherSceneIsLoaded)
+        if (destroyOnSceneLoad)
         {
             DontDestroyOnLoad(gameObject);
         }
