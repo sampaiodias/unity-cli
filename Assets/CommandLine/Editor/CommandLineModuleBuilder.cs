@@ -89,7 +89,7 @@ public class CommandLineModuleBuilder : EditorWindow {
                 outfile.WriteLine("");
                 outfile.WriteLine("    public void Help()");
                 outfile.WriteLine("    {");
-                outfile.WriteLine("        CommandLineCore.PrintOnCLIU(\"dosomething string:messageToPrint\\ndosomethingelse\");");
+                outfile.WriteLine("        CommandLineCore.Print(\"dosomething string:messageToPrint\\ndosomethingelse\");");
                 outfile.WriteLine("    }");
                 outfile.WriteLine("}");
                 outfile.WriteLine("");
