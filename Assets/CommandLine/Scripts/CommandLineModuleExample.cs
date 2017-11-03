@@ -22,6 +22,6 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.PrintOnCLIU("dosomething string:messageToPrint\ndosomethingelse");
+        CommandLineCore.Print("dosomething string:messageToPrint\ndosomethingelse");
     }
 }

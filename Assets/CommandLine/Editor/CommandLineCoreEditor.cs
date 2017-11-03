@@ -12,5 +12,7 @@ public class CommandLineCoreEditor : Editor {
         logo = (Texture2D)Resources.Load("Textures/Logo", typeof(Texture2D));
         GUILayout.Label(logo);
         DrawDefaultInspector();
+        GUILayout.Space(10);
+        GUILayout.Label("Made by Lucas Sampaio Dias\n(lucassampaiodias@gmail.com)", EditorStyles.centeredGreyMiniLabel);
     }
 }

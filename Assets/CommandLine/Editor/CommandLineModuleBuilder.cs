@@ -12,7 +12,8 @@ public class CommandLineModuleBuilder : EditorWindow {
     [MenuItem("Window/CLIU/Module Builder")]
     public static void OpenModuleBuilder()
     {
-        GetWindow<CommandLineModuleBuilder>("Module Builder");
+        CommandLineModuleBuilder window = GetWindow<CommandLineModuleBuilder>("Module Builder");
+        window.minSize = new Vector2(415, 415);
     }
 
     private void OnEnable()

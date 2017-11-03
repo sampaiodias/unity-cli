@@ -7,7 +7,7 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
         switch (args[1].ToLower())
         {
             case "callall":
-                GameObject[] allObjectsOnScene = GameObject.FindObjectsOfType<GameObject>();
+                GameObject[] allObjectsOnScene = FindObjectsOfType<GameObject>();
                 for (int i = 0; i < allObjectsOnScene.Length; i++)
                 {
                     try
@@ -37,6 +37,9 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
                     Destroy(item);
                 }
                 break;
+            case "instantiate":
+                UnityEditor.PrefabUtility.InstantiatePrefab(Resources.Load(args[2]));
+                break;
             case "help":
             case "h":
             case "-h":
@@ -47,6 +50,6 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.PrintOnCLIU("call string:methodName string:gameObjectName\ncallByTag string:methodName string:gameObjectTag\ncallAll string:methodName\ndestroy string:gameObjectName\ndestroyTag string:gameObjectsTag");
+        CommandLineCore.Print("call string:methodName string:gameObjectName\ncallByTag string:methodName string:gameObjectTag\ncallAll string:methodName\ndestroy string:gameObjectName\ndestroyTag string:gameObjectsTag\ninstantiate string:pathInAResourcesFolder");
     }
 }
