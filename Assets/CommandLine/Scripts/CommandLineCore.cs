@@ -9,8 +9,11 @@ public class CommandLineCore : MonoBehaviour {
     public string openWindowHotkey = "]";
     [Tooltip("Leave empty if you don't want a hotkey")]
     public string closeWindowHotkey = "escape";
+    [Tooltip("If enabled, the CLIU Window will automatically close when the game starts")]
     public bool startHidden = true;
+    [Tooltip("If enabled, the 'Open CLIU' button will never appear on the screen")]
     public bool hideOpenWindowButton = false;
+    [Tooltip("If enabled, you'll be able to drag the CLIU Window around by holding the white bar")]
     public bool draggableWindow = true;
     [Header("Advanced Settings")]
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
@@ -44,7 +47,7 @@ public class CommandLineCore : MonoBehaviour {
         string firstArg = args[0].ToLower();
 
         //Search for a match on the Core commands. Don't name your custom commands with these names (like "hide" or "exit")
-        if(firstArg == "help" || firstArg == "h" || firstArg == "-h")
+        if (firstArg == "help" || firstArg == "h" || firstArg == "-h")
         {
             ShowHelp(args);            
         }

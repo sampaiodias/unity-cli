@@ -20,12 +20,12 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
                 }                
                 break;
             case "call":
-                GameObject obj = GameObject.Find(args[3]);
-                obj.SendMessage(args[2]);
+                GameObject obj = GameObject.Find(args[2]);
+                obj.SendMessage(args[3]);
                 break;
             case "calltag":
-                GameObject objTag = GameObject.FindGameObjectWithTag(args[3]);
-                objTag.SendMessage(args[2]);
+                GameObject objTag = GameObject.FindGameObjectWithTag(args[2]);
+                objTag.SendMessage(args[3]);
                 break;
             case "destroy":
                 Destroy(GameObject.Find(args[2]));               
@@ -50,6 +50,6 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print("call string:methodName string:gameObjectName\ncallByTag string:methodName string:gameObjectTag\ncallAll string:methodName\ndestroy string:gameObjectName\ndestroyTag string:gameObjectsTag\ninstantiate string:pathInAResourcesFolder");
+        CommandLineCore.Print("call string:gameObjectName string:methodName\ncallbytag string:gameObjectTag string:methodName\ncallall string:methodName\ndestroy string:gameObjectName\ndestroytag string:gameObjectsTag\ninstantiate string:pathInAResourcesFolder");
     }
 }
