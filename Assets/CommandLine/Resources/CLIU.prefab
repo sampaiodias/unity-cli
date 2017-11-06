@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 222182784781672888}
   - component: {fileID: 114816088293048068}
   m_Layer: 5
-  m_Name: InputPlaceholderText
+  m_Name: CLIU-InputPlaceholderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 222761450052995064}
   - component: {fileID: 114107456419665180}
   m_Layer: 5
-  m_Name: InputText
+  m_Name: CLIU-InputText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -856,8 +856,9 @@ MonoBehaviour:
   startHidden: 1
   hideOpenWindowButton: 0
   draggableWindow: 1
-  destroyOnSceneLoad: 0
   resetWindowHotkey: 
+  destroyOnSceneLoad: 0
+  NoGUI: 0
   initPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114409582902165698
 MonoBehaviour:

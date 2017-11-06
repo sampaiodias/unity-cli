@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CommandLineCore : MonoBehaviour {
 
@@ -20,8 +21,14 @@ public class CommandLineCore : MonoBehaviour {
     public string resetWindowHotkey = "";
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject.")]
     public bool destroyOnSceneLoad = false;    
-    [Tooltip("If enabled, the GUI will NEVER appear on your game. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with this setting enabled, use RunCommand() via script.")]
+    [Tooltip("If enabled, the GUI will NEVER appear on your game at all. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with the window hidden use RunCommand() via script.")]
     public bool NoGUI = false;
+    [Tooltip("If enabled, the GUI will NEVER appear on your game builds, but will still appear while you are using Unity. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with the window hidden use RunCommand() via script.")]
+    public bool NoGUIOutsideUnity = false;
+    [Tooltip("If disabled, the placeholder text for the input will NOT change while a module is on focus.")]
+    public bool showFocusedModule = true;
+    [Tooltip("When CLIU initializes, the module speficied will be automatically focused. Leave empty if you don't want the automatic focus to happen.")]
+    public string focusByDefault = "";
 
     [HideInInspector]
     public Vector3 initPos;
@@ -34,6 +41,8 @@ public class CommandLineCore : MonoBehaviour {
     private List<string> moduleNames = new List<string>();
     private GameObject buttonOpenWindow;
     private CommandLineWindowManager windowManager;
+    private Text placeholderText;
+    private string initialPlaceholderText;
     private string focusedModule = "";
 
     private void Start()
@@ -86,7 +95,7 @@ public class CommandLineCore : MonoBehaviour {
             {
                 if (args.Length > 1)
                 {
-                    focusedModule = args[1].ToLower();
+                    SetFocus(args[1].ToLower());                  
                 }
             }
 
@@ -107,7 +116,14 @@ public class CommandLineCore : MonoBehaviour {
         {
             if (args[0].ToLower() == "focus")
             {
-                focusedModule = "";
+                if (args.Length > 1)
+                {
+                    SetFocus(args[1].ToLower()); //a
+                }
+                else
+                {
+                    RemoveFocus();
+                }                
             }
             else
             {
@@ -247,6 +263,8 @@ public class CommandLineCore : MonoBehaviour {
         window = GameObject.Find("CLIU-Window").gameObject;
         windowManager = FindObjectOfType<CommandLineWindowManager>();
         inputField = FindObjectOfType<CommandLineInputField>();
+        placeholderText = GameObject.Find("CLIU-InputPlaceholderText").GetComponent<Text>();
+        initialPlaceholderText = placeholderText.text;
     }
 
     private void InitiateModules()
@@ -270,7 +288,13 @@ public class CommandLineCore : MonoBehaviour {
 
     private void SettingBasedProcedures()
     {
-        if (NoGUI)
+        focusedModule = focusByDefault;
+        if (focusedModule != "")
+        {
+            SetFocus(focusedModule);
+        }
+
+        if (NoGUI || (!Application.isEditor && NoGUIOutsideUnity))
         {
             GetComponent<Canvas>().enabled = false;
             openWindowHotkey = "";
@@ -299,5 +323,20 @@ public class CommandLineCore : MonoBehaviour {
     private void ResetWindow()
     {
         window.transform.position = initPos;
+    }
+
+    private void SetFocus(string module)
+    {
+        focusedModule = module.ToLower();
+        if (showFocusedModule)
+        {
+            placeholderText.text = "Focused Module: " + module.ToLower();
+        }
+    }
+
+    private void RemoveFocus()
+    {
+        focusedModule = "";
+        placeholderText.text = initialPlaceholderText;
     }
 }
