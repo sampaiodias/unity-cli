@@ -5,21 +5,23 @@ using UnityEngine;
 public class CommandLineCore : MonoBehaviour {
 
     [Header("Basic Settings")]
-    [Tooltip("Leave empty if you don't want a hotkey")]
+    [Tooltip("Leave empty if you don't want a hotkey.")]
     public string openWindowHotkey = "]";
-    [Tooltip("Leave empty if you don't want a hotkey")]
+    [Tooltip("Leave empty if you don't want a hotkey.")]
     public string closeWindowHotkey = "escape";
-    [Tooltip("If enabled, the CLIU Window will automatically close when the game starts")]
+    [Tooltip("If enabled, the CLIU Window will automatically close when the game starts.")]
     public bool startHidden = true;
-    [Tooltip("If enabled, the 'Open CLIU' button will never appear on the screen")]
+    [Tooltip("If enabled, the 'Open CLIU' button will never appear on the screen.")]
     public bool hideOpenWindowButton = false;
-    [Tooltip("If enabled, you'll be able to drag the CLIU Window around by holding the white bar")]
+    [Tooltip("If enabled, you'll be able to drag the CLIU Window around by holding the white bar.")]
     public bool draggableWindow = true;
     [Header("Advanced Settings")]
-    [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
-    public bool destroyOnSceneLoad = false;
-    [Tooltip("Reset the CLIU window to its initial position. Leave empty if you don't want a hotkey")]
+    [Tooltip("Reset the CLIU window to its initial position. Leave empty if you don't want a hotkey.")]
     public string resetWindowHotkey = "";
+    [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject.")]
+    public bool destroyOnSceneLoad = false;    
+    [Tooltip("If enabled, the GUI will NEVER appear on your game. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with this setting enabled, use RunCommand() via script.")]
+    public bool NoGUI = false;
 
     [HideInInspector]
     public Vector3 initPos;
@@ -238,6 +240,14 @@ public class CommandLineCore : MonoBehaviour {
 
     private void SettingBasedProcedures()
     {
+        if (NoGUI)
+        {
+            GetComponent<Canvas>().enabled = false;
+            openWindowHotkey = "";
+            startHidden = true;
+            hideOpenWindowButton = true;
+        }
+
         if (destroyOnSceneLoad)
         {
             DontDestroyOnLoad(gameObject);

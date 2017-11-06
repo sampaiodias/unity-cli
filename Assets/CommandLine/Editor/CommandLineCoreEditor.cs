@@ -9,7 +9,7 @@ public class CommandLineCoreEditor : Editor {
 
     public override void OnInspectorGUI()
     {
-        logo = (Texture2D)Resources.Load("Textures/Logo", typeof(Texture2D));
+        logo = (Texture2D)Resources.Load("Textures/CLIU-Logo", typeof(Texture2D));
         GUILayout.Label(logo);
         DrawDefaultInspector();
         GUILayout.Space(10);

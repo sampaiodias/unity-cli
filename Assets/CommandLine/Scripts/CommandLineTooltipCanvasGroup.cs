@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CommandLineHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler  {
+public class CommandLineTooltipCanvasGroup : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler  {
 
     public CanvasGroup helperWindow;
 

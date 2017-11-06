@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class CommandLineHotkey : ScriptableObject {
+public class CommandLineEditorButtons : ScriptableObject {
 
     static GameObject cliuWindow;
 
-    [MenuItem("Window/CLIU/Instantiate or Destroy CLIU &0")]
+    [MenuItem("CLIU/Instantiate or Destroy CLIU &0")]
     static void OpenCLIU()
     {
         if (cliuWindow == null)
@@ -31,7 +31,7 @@ public class CommandLineHotkey : ScriptableObject {
         }
     }
 
-    [MenuItem("Window/CLIU/Instantiate or Destroy CLIU (Prefab Clone)")]
+    [MenuItem("CLIU/Instantiate or Destroy CLIU (Prefab Clone)")]
     static void OpenCLIUClone()
     {
         if (cliuWindow == null)

@@ -9,7 +9,7 @@ public class CommandLineModuleBuilder : EditorWindow {
     string moduleScriptName = "CommandLineModuleExampleName";
     Texture2D logo;
 
-    [MenuItem("Window/CLIU/Module Builder")]
+    [MenuItem("CLIU/Module Builder")]
     public static void OpenModuleBuilder()
     {
         CommandLineModuleBuilder window = GetWindow<CommandLineModuleBuilder>("Module Builder");
@@ -18,7 +18,7 @@ public class CommandLineModuleBuilder : EditorWindow {
 
     private void OnEnable()
     {
-        logo = (Texture2D)Resources.Load("Textures/Logo", typeof(Texture2D));
+        logo = (Texture2D)Resources.Load("Textures/CLIU-Logo", typeof(Texture2D));
     }
 
     void OnGUI()
