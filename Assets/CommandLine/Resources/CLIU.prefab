@@ -1400,7 +1400,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1410,16 +1410,15 @@ MonoBehaviour:
     quotes):</b>
 
 
-    "help": Show the commands built on CLIU Core component (the "brain" of this window)
+    "help": Show the CLIU Core commands
 
     "modules": Show the internal code of the modules installed
 
     "help codeofthemodule": Use help and the code of a module to see its commands
 
 
-    Tip: when you insert a command without the module''s code, ALL modules with this
-    command will called. If you dont want this, use for example "time timescale 1"
-    instead of just "timescale 1".'
+    Be sure to check the documentation PDF if you need more help. If you have suggestions
+    or bugs to report, send an email to lucassampaiodias@gmail.com'
 --- !u!114 &114993702056743574
 MonoBehaviour:
   m_ObjectHideFlags: 1
