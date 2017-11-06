@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
@@ -34,6 +35,8 @@ public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
             case "getscale":
                 CommandLineCore.Print(GameObject.Find(args[2]).transform.localScale.ToString());
                 break;
+            case "help":
+            case "h":
             case "-h":
                 Help();
                 break;
@@ -42,16 +45,19 @@ public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print(
-            "position string:gameObjectName float:x float:y float:z\n" +
-            "move string:gameObjectName float:x float:y float:z\n" +
-            "rotation string:gameObjectName float:x float:y float:z float:w\n" +
-            "rotate string:gameObjectName float:x float:y float:z\n" +
-            "scale string:gameObjectName float:x float:y float:z\n" +
-            "addscale string:gameObjectName float:x float:y float:z\n" +
-            "getposition string:gameObjectName\n" +
-            "getrotation string:gameObjectName\n" +
-            "getscale string:gameObjectName\n");
+        StringBuilder helpMessage = new StringBuilder();
+
+        helpMessage.Append("position string:gameObjectName float:x float:y float:z\n");
+        helpMessage.Append("move string:gameObjectName float:x float:y float:z\n");
+        helpMessage.Append("rotation string:gameObjectName float:x float:y float:z float:w\n");
+        helpMessage.Append("rotate string:gameObjectName float:x float:y float:z\n");
+        helpMessage.Append("scale string:gameObjectName float:x float:y float:z\n");
+        helpMessage.Append("addscale string:gameObjectName float:x float:y float:z\n");
+        helpMessage.Append("getposition string:gameObjectName\n");
+        helpMessage.Append("getrotation string:gameObjectName\n");
+        helpMessage.Append("getscale string:gameObjectName");
+
+        CommandLineCore.Print(helpMessage.ToString());
     }
 }
 

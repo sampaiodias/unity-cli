@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 public class CommandLineModulePlayerPrefs : MonoBehaviour, ICommandLineModule {
@@ -38,7 +39,18 @@ public class CommandLineModulePlayerPrefs : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print("getint string:key\ngetfloat string:key\ngetstring string:key\nsetint string:key int:value\nsetfloat string:key float:value\nsetstring string:key string:value\nsaveprefs\ndeleteallprefs");
+        StringBuilder helpMessage = new StringBuilder();
+
+        helpMessage.Append("getint string:key\n");
+        helpMessage.Append("getfloat string:key\n");
+        helpMessage.Append("getstring string:key\n");
+        helpMessage.Append("setint string:key int:value\n");
+        helpMessage.Append("setfloat string:key float:value\n");
+        helpMessage.Append("setstring string:key string:value\n");
+        helpMessage.Append("saveprefs\n");
+        helpMessage.Append("deleteallprefs");
+
+        CommandLineCore.Print(helpMessage.ToString());
     }
 }
 

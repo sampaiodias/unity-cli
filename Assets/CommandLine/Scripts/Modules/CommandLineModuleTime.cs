@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text;
 using UnityEngine;
 
 public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
@@ -32,7 +33,14 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print("timescale float:amount\nslowmo float:amount float:duration\ndevicetime\ncurrenttimescale");
+        StringBuilder helpMessage = new StringBuilder();
+
+        helpMessage.Append("timescale float:amount\n");
+        helpMessage.Append("slowmo float:amount float:duration\n");
+        helpMessage.Append("devicetime\n");
+        helpMessage.Append("currenttimescale");
+
+        CommandLineCore.Print(helpMessage.ToString());
     }
 
     public void TimeScale(string amount)

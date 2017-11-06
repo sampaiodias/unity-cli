@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
@@ -40,7 +41,15 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print("loadscene int:sceneIndex\nreloadscene\nloadnextscene\nloadpreviousscene\nsceneindex");
+        StringBuilder helpMessage = new StringBuilder();
+
+        helpMessage.Append("loadscene int:sceneIndex\n");
+        helpMessage.Append("reloadscene\n");
+        helpMessage.Append("loadnextscene\n");
+        helpMessage.Append("loadpreviousscene\n");
+        helpMessage.Append("sceneindex");
+
+        CommandLineCore.Print(helpMessage.ToString());
     }
 
     public void ReloadScene()

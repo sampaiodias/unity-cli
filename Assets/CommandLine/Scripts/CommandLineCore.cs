@@ -18,6 +18,8 @@ public class CommandLineCore : MonoBehaviour {
     [Header("Advanced Settings")]
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject")]
     public bool destroyOnSceneLoad = false;
+    [Tooltip("Reset the CLIU window to its initial position. Leave empty if you don't want a hotkey")]
+    public string resetWindowHotkey = "";
 
     [HideInInspector]
     public Vector3 initPos;
@@ -72,7 +74,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else if (firstArg == "reset")
         {
-            window.transform.position = initPos;
+            ResetWindow();
         }
 
         //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
@@ -252,5 +254,10 @@ public class CommandLineCore : MonoBehaviour {
         {
             buttonOpenWindow.SetActive(false);
         }
+    }
+
+    private void ResetWindow()
+    {
+        window.transform.position = initPos;
     }
 }

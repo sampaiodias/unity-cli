@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using UnityEngine;
 
 public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
@@ -50,6 +51,15 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print("call string:gameObjectName string:methodName\ncallbytag string:gameObjectTag string:methodName\ncallall string:methodName\ndestroy string:gameObjectName\ndestroytag string:gameObjectsTag\ninstantiate string:pathInAResourcesFolder");
+        StringBuilder helpMessage = new StringBuilder();
+
+        helpMessage.Append("call string:gameObjectName string:methodName\n");
+        helpMessage.Append("callbytag string:gameObjectTag string:methodName\n");
+        helpMessage.Append("callall string:methodName\n");
+        helpMessage.Append("destroy string:gameObjectName\n");
+        helpMessage.Append("destroytag string:gameObjectsTag\n");
+        helpMessage.Append("instantiate string:pathInAResourcesFolder");
+
+        CommandLineCore.Print(helpMessage.ToString());
     }
 }

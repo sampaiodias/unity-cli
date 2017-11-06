@@ -23,7 +23,15 @@ public class CommandLineWindowManager : MonoBehaviour {
             {
                 CloseCLIUWindow();
             }
-        }        
+        }
+
+        if (commandLineCore.resetWindowHotkey != "" && commandLineCore.resetWindowHotkey != null)
+        {
+            if (Input.GetKeyDown(commandLineCore.resetWindowHotkey))
+            {
+                commandLineCore.RunCommand(new string[1] { "reset" });
+            }
+        }
     }
 
     public void OpenCLIUWindow()

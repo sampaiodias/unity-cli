@@ -4,7 +4,7 @@ using System.IO;
 
 public class CommandLineModuleBuilder : EditorWindow {
 
-    string moduleName = "ModuleName";
+    string moduleName = "ModuleName"; //Prefab Name
     string moduleCode = "example";
     string moduleScriptName = "CommandLineModuleExampleName";
     Texture2D logo;
@@ -68,6 +68,7 @@ public class CommandLineModuleBuilder : EditorWindow {
             using (StreamWriter outfile = new StreamWriter("Assets/CommandLine/Scripts/Modules/" + name + ".cs"))
             {
                 outfile.WriteLine("using UnityEngine;");
+                outfile.WriteLine("using System.Text;");
                 outfile.WriteLine("");
                 outfile.WriteLine("public class " + name + " : MonoBehaviour, ICommandLineModule {");
                 outfile.WriteLine("    public void Execute(string[] args)");
@@ -89,7 +90,12 @@ public class CommandLineModuleBuilder : EditorWindow {
                 outfile.WriteLine("");
                 outfile.WriteLine("    public void Help()");
                 outfile.WriteLine("    {");
-                outfile.WriteLine("        CommandLineCore.Print(\"dosomething string:messageToPrint\\ndosomethingelse\");");
+                outfile.WriteLine("        StringBuilder helpMessage = new StringBuilder();");
+                outfile.WriteLine("");
+                outfile.WriteLine("        helpMessage.Append(\"dosomething string:messageToPrint\\n\");");
+                outfile.WriteLine("        helpMessage.Append(\"dosomethingelse\");");
+                outfile.WriteLine("");
+                outfile.WriteLine("        CommandLineCore.Print(helpMessage.ToString());");
                 outfile.WriteLine("    }");
                 outfile.WriteLine("}");
                 outfile.WriteLine("");
