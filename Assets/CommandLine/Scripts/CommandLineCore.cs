@@ -33,7 +33,8 @@ public class CommandLineCore : MonoBehaviour {
     private List<CommandLineModuleSettings> moduleSettings;
     private List<string> moduleNames = new List<string>();
     private GameObject buttonOpenWindow;
-    private CommandLineWindowManager windowManager;    
+    private CommandLineWindowManager windowManager;
+    private string focusedModule = "";
 
     private void Start()
     {
@@ -48,47 +49,76 @@ public class CommandLineCore : MonoBehaviour {
     /// <param name="args">Get the command on args[0] and its (optional) parameters on args[1], args[2], and so on. Example: { "call", "PlayerGameObject", "RespawnMethod" } OR { "help", "time" }</param>
     public void RunCommand(string[] args)
     {
-        string firstArg = args[0].ToLower();
+        //If there is no focused module (all commands delivered directly to the module)
+        if (focusedModule == "")
+        {
+            string firstArg = args[0].ToLower();
 
-        //Search for a match on the Core commands. Don't name your custom commands with these names (like "hide" or "exit")
-        if (firstArg == "help" || firstArg == "h" || firstArg == "-h")
-        {
-            ShowHelp(args);            
-        }
-        else if (firstArg == "modules" || firstArg == "m")
-        {
-            ShowModulesLoaded();
-        }
-        else if (firstArg == "hide" || firstArg == "close")
-        {
-            windowManager.CloseCLIUWindow();
-        }
-        else if (firstArg == "exit")
-        {
+            //Search for a match on the Core commands. Don't name your custom commands with these names (like "hide" or "exit")
+            if (firstArg == "help" || firstArg == "h" || firstArg == "-h")
+            {
+                ShowHelp(args);
+            }
+            else if (firstArg == "modules" || firstArg == "m")
+            {
+                ShowModulesLoaded();
+            }
+            else if (firstArg == "hide" || firstArg == "close")
+            {
+                windowManager.CloseCLIUWindow();
+            }
+            else if (firstArg == "exit")
+            {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;        
+                UnityEditor.EditorApplication.isPlaying = false;
 #endif
-            Application.Quit();
-        }
-        else if (firstArg == "clear")
-        {
-            inputField.Clear();
-        }
-        else if (firstArg == "reset")
-        {
-            ResetWindow();
-        }
+                Application.Quit();
+            }
+            else if (firstArg == "clear")
+            {
+                inputField.Clear();
+            }
+            else if (firstArg == "reset")
+            {
+                ResetWindow();
+            }
+            else if (firstArg == "focus")
+            {
+                if (args.Length > 1)
+                {
+                    focusedModule = args[1].ToLower();
+                }
+            }
 
-        //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
-        else if (args.Length > 1 && moduleNames.Contains(firstArg)) 
-        {
-            SendCommandTo(firstArg, "Execute", args);
-        }
+            //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
+            else if (args.Length > 1 && moduleNames.Contains(firstArg))
+            {
+                SendCommandTo(firstArg, "Execute", args);
+            }
 
-        //If everything above fails, Core sends a command to the Execute() of ALL modules. Example: "timescale 0"
+            //If everything above fails, Core sends a command to the Execute() of ALL modules. Example: "timescale 0"
+            else
+            {
+                SendCommandToAllModules("Execute", args);
+            }
+        }
+        //If there is a focused module
         else
         {
-            SendCommandToAllModules("Execute", args);
+            if (args[0].ToLower() == "focus")
+            {
+                focusedModule = "";
+            }
+            else
+            {
+                string[] newArgs = new string[args.Length + 1];
+                newArgs[0] = "";
+                for (int i = 1; i < newArgs.Length; i++)
+                {
+                    newArgs[i] = args[i - 1];
+                }
+                SendCommandTo(focusedModule, "Execute", newArgs);
+            }
         }
     }
 
@@ -112,7 +142,7 @@ public class CommandLineCore : MonoBehaviour {
         else
         {
             Print("Enter 'help codeofthemodule' to see what each module can do. To list all module codes, enter 'm' or 'modules'.");
-            Print("Core Commands: help (or h), modules (or m), hide (or close), exit, clear, reset");
+            Print("Core Commands: help (or h), modules (or m), hide (or close), exit, clear, reset, focus.");
         }
     }    
 
