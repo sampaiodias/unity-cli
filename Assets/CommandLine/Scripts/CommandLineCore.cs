@@ -118,7 +118,7 @@ public class CommandLineCore : MonoBehaviour {
             {
                 if (args.Length > 1)
                 {
-                    SetFocus(args[1].ToLower()); //a
+                    SetFocus(args[1].ToLower());
                 }
                 else
                 {
@@ -157,8 +157,8 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            Print("Enter 'help codeofthemodule' to see what each module can do. To list all module codes, enter 'm' or 'modules'.");
-            Print("Core Commands: help (or h), modules (or m), hide (or close), exit, clear, reset, focus.");
+            Print("help: show this message\nmodules: List the code of all the modules running\nhelp moduleCode: show the help message of the module specified\nhide: Hide the CLIU window\nexit: Exit the entire application/game\nclear: Clear all the text on the output\nreset: Returns the CLIU window to its initial position\nfocus moduleCode: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return the normal CLIU behaviour.");
+            Print("Be sure to check the documentation PDF if you need more help.");
         }
     }    
 
