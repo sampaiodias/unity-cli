@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script manages the output text for the CLIU window.
+/// </summary>
 public class CommandLineOutputText : MonoBehaviour {
 
     public RectTransform output;

@@ -4,42 +4,50 @@ using UnityEngine;
 public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
     public void Execute(string[] args)
     {
-        switch (args[1].ToLower()) {
-            case "position":
-            case "setposition":
-                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.position = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
-                break;
-            case "move":
-                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.position += new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
-                break;
-            case "rotation":
-            case "setrotation":
-                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.eulerAngles = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
-                break;
-            case "rotate":
-                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.Rotate(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
-                break;
-            case "scale":
-            case "setscale":
-                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.localScale = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
-                break;
-            case "addscale":
-                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.localScale += new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
-                break;
-            case "getposition":
-                CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.position.ToString());
-                break;
-            case "getrotation":
-                CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.rotation.ToString());
-                break;
-            case "getscale":
-                CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.localScale.ToString());
-                break;
-            case "help":
-            case "h":
-            case "-h":
-                Help();
-                break;
+        try
+        {
+            switch (args[1].ToLower())
+            {
+                case "position":
+                case "setposition":
+                    GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.position = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
+                    break;
+                case "move":
+                    GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.position += new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
+                    break;
+                case "rotation":
+                case "setrotation":
+                    GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.eulerAngles = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
+                    break;
+                case "rotate":
+                    GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.Rotate(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
+                    break;
+                case "scale":
+                case "setscale":
+                    GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.localScale = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
+                    break;
+                case "addscale":
+                    GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.localScale += new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
+                    break;
+                case "getposition":
+                    CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.position.ToString());
+                    break;
+                case "getrotation":
+                    CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.rotation.ToString());
+                    break;
+                case "getscale":
+                    CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.localScale.ToString());
+                    break;
+                case "help":
+                case "h":
+                case "-h":
+                    Help();
+                    break;
+            }
+        }
+        catch (System.Exception e)
+        {
+            CommandLineCore.PrintError(e.ToString());
         }
     }
 

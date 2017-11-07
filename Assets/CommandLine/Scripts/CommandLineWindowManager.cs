@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// This script handles what screens should appear or disappear based on certain events
+/// </summary>
 public class CommandLineWindowManager : MonoBehaviour {
 
     public GameObject window;

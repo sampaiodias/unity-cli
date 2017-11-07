@@ -3,6 +3,9 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This is the core (or brain) of CLIU. This is also the class which you should use for public methods like Print()
+/// </summary>
 public class CommandLineCore : MonoBehaviour {
 
     [Header("Basic Settings")]
@@ -60,83 +63,90 @@ public class CommandLineCore : MonoBehaviour {
     /// <param name="args">Get the command on args[0] and its (optional) parameters on args[1], args[2], and so on. Example: { "call", "PlayerGameObject", "RespawnMethod" } OR { "help", "time" }</param>
     public void RunCommand(string[] args)
     {
-        //If there is no focused module (all commands delivered directly to the module)
-        if (focusedModule == "")
+        try
         {
-            string firstArg = args[0].ToLower();
+            //If there is no focused module (all commands delivered directly to the module)
+            if (focusedModule == "")
+            {
+                string firstArg = args[0].ToLower();
 
-            //Search for a match on the Core commands. Don't name your custom commands with these names (like "hide" or "exit")
-            if (firstArg == "help" || firstArg == "h" || firstArg == "-h")
-            {
-                ShowHelp(args);
-            }
-            else if (firstArg == "modules" || firstArg == "m")
-            {
-                ShowModulesLoaded();
-            }
-            else if (firstArg == "hide" || firstArg == "close")
-            {
-                windowManager.CloseCLIUWindow();
-            }
-            else if (firstArg == "exit")
-            {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#endif
-                Application.Quit();
-            }
-            else if (firstArg == "clear")
-            {
-                inputField.Clear();
-            }
-            else if (firstArg == "reset")
-            {
-                ResetWindow();
-            }
-            else if (firstArg == "focus")
-            {
-                if (args.Length > 1)
+                //Search for a match on the Core commands. Don't name your custom commands with these names (like "hide" or "exit")
+                if (firstArg == "help" || firstArg == "h" || firstArg == "-h")
                 {
-                    SetFocus(args[1].ToLower());                  
+                    ShowHelp(args);
+                }
+                else if (firstArg == "modules" || firstArg == "m")
+                {
+                    ShowModulesLoaded();
+                }
+                else if (firstArg == "hide" || firstArg == "close")
+                {
+                    windowManager.CloseCLIUWindow();
+                }
+                else if (firstArg == "exit")
+                {
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                    Application.Quit();
+                }
+                else if (firstArg == "clear")
+                {
+                    inputField.Clear();
+                }
+                else if (firstArg == "reset")
+                {
+                    ResetWindow();
+                }
+                else if (firstArg == "focus")
+                {
+                    if (args.Length > 1)
+                    {
+                        SetFocus(args[1].ToLower());
+                    }
+                }
+
+                //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
+                else if (args.Length > 1 && moduleNames.Contains(firstArg))
+                {
+                    SendCommandTo(firstArg, "Execute", args);
+                }
+
+                //If everything above fails, Core sends a command to the Execute() of ALL modules. Example: "timescale 0"
+                else
+                {
+                    SendCommandToAllModules("Execute", args);
                 }
             }
-
-            //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
-            else if (args.Length > 1 && moduleNames.Contains(firstArg))
-            {
-                SendCommandTo(firstArg, "Execute", args);
-            }
-
-            //If everything above fails, Core sends a command to the Execute() of ALL modules. Example: "timescale 0"
+            //If there is a focused module
             else
             {
-                SendCommandToAllModules("Execute", args);
+                if (args[0].ToLower() == "focus")
+                {
+                    if (args.Length > 1)
+                    {
+                        SetFocus(args[1].ToLower());
+                    }
+                    else if (!preventUnfocus)
+                    {
+                        RemoveFocus();
+                    }
+                }
+                else
+                {
+                    string[] newArgs = new string[args.Length + 1];
+                    newArgs[0] = "";
+                    for (int i = 1; i < newArgs.Length; i++)
+                    {
+                        newArgs[i] = args[i - 1];
+                    }
+                    SendCommandTo(focusedModule, "Execute", newArgs);
+                }
             }
         }
-        //If there is a focused module
-        else
+        catch (System.Exception e)
         {
-            if (args[0].ToLower() == "focus")
-            {
-                if (args.Length > 1)
-                {
-                    SetFocus(args[1].ToLower());
-                }
-                else if (!preventUnfocus)
-                {
-                    RemoveFocus();
-                }                
-            }
-            else
-            {
-                string[] newArgs = new string[args.Length + 1];
-                newArgs[0] = "";
-                for (int i = 1; i < newArgs.Length; i++)
-                {
-                    newArgs[i] = args[i - 1];
-                }
-                SendCommandTo(focusedModule, "Execute", newArgs);
-            }
+            PrintError("Error on CLIU Core: " + e.ToString());
         }
     }
 
@@ -295,30 +305,44 @@ public class CommandLineCore : MonoBehaviour {
 
     private void InitiateCore()
     {
-        buttonOpenWindow = GameObject.Find("CLIU-OpenCLIUButton");
-        window = GameObject.Find("CLIU-Window").gameObject;
-        windowManager = FindObjectOfType<CommandLineWindowManager>();
-        inputField = FindObjectOfType<CommandLineInputField>();
-        placeholderText = GameObject.Find("CLIU-InputPlaceholderText").GetComponent<Text>();
-        initialPlaceholderText = placeholderText.text;
+        try
+        {
+            buttonOpenWindow = GameObject.Find("CLIU-OpenCLIUButton");
+            window = GameObject.Find("CLIU-Window").gameObject;
+            windowManager = FindObjectOfType<CommandLineWindowManager>();
+            inputField = FindObjectOfType<CommandLineInputField>();
+            placeholderText = GameObject.Find("CLIU-InputPlaceholderText").GetComponent<Text>();
+            initialPlaceholderText = placeholderText.text;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("CLIU could not Initiate!\n" + e.ToString());
+        }        
     }
 
     private void InitiateModules()
     {
-        Object[] modules = Resources.LoadAll("Modules");
-        commandLineModules = new GameObject[modules.Length];
-        moduleSettings = new List<CommandLineModuleSettings>();
-        modulesParent = transform.Find("CLIU-Modules").gameObject;
-
-        for (int i = 0; i < modules.Length; i++)
+        try
         {
-            commandLineModules[i] = (GameObject)Instantiate(modules[i], modulesParent.transform);
+            Object[] modules = Resources.LoadAll("Modules");
+            commandLineModules = new GameObject[modules.Length];
+            moduleSettings = new List<CommandLineModuleSettings>();
+            modulesParent = transform.Find("CLIU-Modules").gameObject;
+
+            for (int i = 0; i < modules.Length; i++)
+            {
+                commandLineModules[i] = (GameObject)Instantiate(modules[i], modulesParent.transform);
+            }
+
+            for (int i = 0; i < commandLineModules.Length; i++)
+            {
+                moduleSettings.Add(commandLineModules[i].GetComponent<CommandLineModuleSettings>());
+                moduleNames.Add(moduleSettings[i].moduleInternalCode.ToLower());
+            }
         }
-
-        for (int i = 0; i < commandLineModules.Length; i++)
+        catch (System.Exception e)
         {
-            moduleSettings.Add(commandLineModules[i].GetComponent<CommandLineModuleSettings>());
-            moduleNames.Add(moduleSettings[i].moduleInternalCode.ToLower());
+            Debug.LogError("CLIU could not Initiate its modules properly!\n" + e.ToString());
         }
     }
 
@@ -363,10 +387,17 @@ public class CommandLineCore : MonoBehaviour {
 
     private void SetFocus(string module)
     {
-        focusedModule = module.ToLower();
-        if (showFocusedModule)
+        if (moduleNames.Contains(module))
         {
-            placeholderText.text = "Focused Module: " + module.ToLower();
+            focusedModule = module.ToLower();
+            if (showFocusedModule)
+            {
+                placeholderText.text = "Focused Module: " + module.ToLower();
+            }
+        }
+        else
+        {
+            PrintError("Could not focus because the module not found!");
         }
     }
 

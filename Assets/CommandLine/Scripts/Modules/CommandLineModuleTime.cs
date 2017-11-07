@@ -6,28 +6,35 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
 
     public void Execute(string[] args)
     {
-        switch (args[1].ToLower())
+        try
         {
-            case "timescale":
-                TimeScale(args[2]);
-                break;
-            case "slowmo":
-            case "slomo":
-            case "slowmotion":
-                SlowMo(args[2], args[3]);
-                break;
-            case "devicetime":
-                DeviceTime();
-                break;
-            case "currenttimescale":
-            case "currentts":
-                CommandLineCore.Print("Current TimeScale: " + Time.timeScale);
-                break;
-            case "help":
-            case "h":
-            case "-h":
-                Help();
-                break;
+            switch (args[1].ToLower())
+            {
+                case "timescale":
+                    TimeScale(args[2]);
+                    break;
+                case "slowmo":
+                case "slomo":
+                case "slowmotion":
+                    SlowMo(args[2], args[3]);
+                    break;
+                case "devicetime":
+                    DeviceTime();
+                    break;
+                case "currenttimescale":
+                case "currentts":
+                    CommandLineCore.Print("Current TimeScale: " + Time.timeScale);
+                    break;
+                case "help":
+                case "h":
+                case "-h":
+                    Help();
+                    break;
+            }
+        }
+        catch (System.Exception e)
+        {
+            CommandLineCore.PrintError(e.ToString());
         }
     }
 
@@ -43,13 +50,13 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
         CommandLineCore.Print(helpMessage.ToString());
     }
 
-    public void TimeScale(string amount)
+    private void TimeScale(string amount)
     {
         Time.timeScale = float.Parse(amount);
         CommandLineCore.Print("TimeScale set to " + Time.timeScale);
     }
 
-    public void SlowMo(string amount, string duration)
+    private void SlowMo(string amount, string duration)
     {
         StartCoroutine(ActivateSlowMo(float.Parse(amount), float.Parse(duration)));
     }
@@ -62,7 +69,7 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
         Time.timeScale = previousTimeScale;
     }
 
-    public void DeviceTime()
+    private void DeviceTime()
     {
         CommandLineCore.Print(System.DateTime.Now.ToString());
     }

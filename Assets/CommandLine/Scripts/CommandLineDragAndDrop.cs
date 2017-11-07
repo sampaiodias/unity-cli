@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Drag and drop the target using Unity's IDragHandler and IBeginDragHandler interfaces.
+/// </summary>
 public class CommandLineDragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     public Transform target;

@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// This script manages the Input Field of the CLIU window. Using the public methods of this script is NOT recommended.
+/// </summary>
 public class CommandLineInputField : MonoBehaviour {
 
     public InputField inputField;
