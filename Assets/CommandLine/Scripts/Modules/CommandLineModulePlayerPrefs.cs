@@ -6,28 +6,30 @@ public class CommandLineModulePlayerPrefs : MonoBehaviour, ICommandLineModule {
     {
         switch (args[1].ToLower()) {
             case "getint":
-                CommandLineCore.Print(PlayerPrefs.GetInt(args[2]).ToString());
+                CommandLineCore.Print(PlayerPrefs.GetInt(CommandLineCore.StringWithSpaces(args, 2)).ToString());
                 break;
             case "getfloat":
-                CommandLineCore.Print(PlayerPrefs.GetFloat(args[2]).ToString());
+                CommandLineCore.Print(PlayerPrefs.GetFloat(CommandLineCore.StringWithSpaces(args, 2)).ToString());
                 break;
             case "getstring":
-                CommandLineCore.Print(PlayerPrefs.GetString(args[2]));
+                CommandLineCore.Print(PlayerPrefs.GetString(CommandLineCore.StringWithSpaces(args, 2)));
                 break;
             case "setint":
-                PlayerPrefs.SetInt(args[2], int.Parse(args[3]));
+                PlayerPrefs.SetInt(CommandLineCore.StringWithPipes(args[2]), int.Parse(args[3]));
                 break;
             case "setfloat":
-                PlayerPrefs.SetFloat(args[2], float.Parse(args[3]));
+                PlayerPrefs.SetFloat(CommandLineCore.StringWithPipes(args[2]), float.Parse(args[3]));
                 break;
             case "setstring":
-                PlayerPrefs.SetString(args[2], args[3]);
+                PlayerPrefs.SetString(CommandLineCore.StringWithPipes(args[2]), CommandLineCore.StringWithSpaces(args, 3));
                 break;
             case "saveprefs":
                 PlayerPrefs.Save();
+                CommandLineCore.PrintSuccess("PlayerPrefs successfully saved!");
                 break;
             case "deleteallprefs":
                 PlayerPrefs.DeleteAll();
+                CommandLineCore.PrintSuccess("All PlayerPrefs were successfully deleted!");
                 break;
             case "help":
             case "h":

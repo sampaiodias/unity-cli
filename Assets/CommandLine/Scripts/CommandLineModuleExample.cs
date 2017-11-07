@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System.Text;
 
 public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
-
     public void Execute(string[] args)
     {
-        switch (args[1].ToLower())
-        {
+        switch (args[1].ToLower()) {
             case "dosomething":
                 Debug.Log("This module is printing " + args[1]);
                 break;
@@ -22,6 +21,12 @@ public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
 
     public void Help()
     {
-        CommandLineCore.Print("dosomething string:messageToPrint\ndosomethingelse");
+        StringBuilder helpMessage = new StringBuilder();
+
+        helpMessage.Append("dosomething string:messageToPrint\n");
+        helpMessage.Append("dosomethingelse");
+
+        CommandLineCore.Print(helpMessage.ToString());
     }
 }
+

@@ -210,6 +210,40 @@ public class CommandLineCore : MonoBehaviour {
         Print(message, "#008000ff");
     }
 
+    /// <summary>
+    /// Get the strings of an array and build them into a single string separating each element with a space
+    /// </summary>
+    /// <param name="args"></param>
+    /// <param name="initialIndex"></param>
+    /// <returns></returns>
+    public static string StringWithSpaces(string[] args, int initialIndex)
+    {
+        StringBuilder entireString = new StringBuilder();
+
+        for (int i = initialIndex; i < args.Length; i++)
+        {
+            entireString.Append(args[i]);
+            if (i + 1 < args.Length)
+            {
+                entireString.Append(" ");
+            }
+        }
+
+        return entireString.ToString();
+    }
+
+    /// <summary>
+    /// Replace the pipe symbols of a string with spaces.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public static string StringWithPipes(string message)
+    {
+        string newKey = message;
+        newKey = newKey.Replace('|', ' ');
+        return newKey;
+    }
+
     private void ShowModulesLoaded()
     {
         StringBuilder builder = new StringBuilder();

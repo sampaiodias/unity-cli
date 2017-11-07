@@ -7,33 +7,33 @@ public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
         switch (args[1].ToLower()) {
             case "position":
             case "setposition":
-                GameObject.Find(args[2]).transform.position = new Vector3(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
+                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.position = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
                 break;
             case "move":
-                GameObject.Find(args[2]).transform.position += new Vector3(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
+                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.position += new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
                 break;
             case "rotation":
             case "setrotation":
-                GameObject.Find(args[2]).transform.eulerAngles = new Vector3(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
+                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.eulerAngles = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
                 break;
             case "rotate":
-                GameObject.Find(args[2]).transform.Rotate(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
+                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.Rotate(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
                 break;
             case "scale":
             case "setscale":
-                GameObject.Find(args[2]).transform.localScale = new Vector3(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
+                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.localScale = new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
                 break;
             case "addscale":
-                GameObject.Find(args[2]).transform.localScale += new Vector3(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
+                GameObject.Find(CommandLineCore.StringWithSpaces(args, 5)).transform.localScale += new Vector3(float.Parse(args[2]), float.Parse(args[3]), float.Parse(args[4]));
                 break;
             case "getposition":
-                CommandLineCore.Print(GameObject.Find(args[2]).transform.position.ToString());
+                CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.position.ToString());
                 break;
             case "getrotation":
-                CommandLineCore.Print(GameObject.Find(args[2]).transform.rotation.ToString());
+                CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.rotation.ToString());
                 break;
             case "getscale":
-                CommandLineCore.Print(GameObject.Find(args[2]).transform.localScale.ToString());
+                CommandLineCore.Print(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)).transform.localScale.ToString());
                 break;
             case "help":
             case "h":
@@ -47,12 +47,12 @@ public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
     {
         StringBuilder helpMessage = new StringBuilder();
 
-        helpMessage.Append("position string:gameObjectName float:x float:y float:z\n");
-        helpMessage.Append("move string:gameObjectName float:x float:y float:z\n");
-        helpMessage.Append("rotation string:gameObjectName float:x float:y float:z float:w\n");
-        helpMessage.Append("rotate string:gameObjectName float:x float:y float:z\n");
-        helpMessage.Append("scale string:gameObjectName float:x float:y float:z\n");
-        helpMessage.Append("addscale string:gameObjectName float:x float:y float:z\n");
+        helpMessage.Append("position name float:x float:y float:z string:gameObjectName\n");
+        helpMessage.Append("move float:x float:y float:z string:gameObjectName\n");
+        helpMessage.Append("rotation float:x float:y float:z string:gameObjectName\n");
+        helpMessage.Append("rotate name float:x float:y float:z string:gameObjectName\n");
+        helpMessage.Append("scale float:x float:y float:z string:gameObjectName\n");
+        helpMessage.Append("addscale float:x float:y float:z string:gameObjectName\n");
         helpMessage.Append("getposition string:gameObjectName\n");
         helpMessage.Append("getrotation string:gameObjectName\n");
         helpMessage.Append("getscale string:gameObjectName");
