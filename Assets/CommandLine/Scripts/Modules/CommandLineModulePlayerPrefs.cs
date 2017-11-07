@@ -46,9 +46,9 @@ public class CommandLineModulePlayerPrefs : MonoBehaviour, ICommandLineModule {
         helpMessage.Append("getint string:key\n");
         helpMessage.Append("getfloat string:key\n");
         helpMessage.Append("getstring string:key\n");
-        helpMessage.Append("setint string:key int:value\n");
-        helpMessage.Append("setfloat string:key float:value\n");
-        helpMessage.Append("setstring string:key string:value\n");
+        helpMessage.Append("setint string:keyWithPipes int:value\n");
+        helpMessage.Append("setfloat string:keyWithPipes float:value\n");
+        helpMessage.Append("setstring string:keyWithPipes string:value\n");
         helpMessage.Append("saveprefs\n");
         helpMessage.Append("deleteallprefs");
 
