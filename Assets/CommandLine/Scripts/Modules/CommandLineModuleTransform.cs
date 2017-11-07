@@ -14,7 +14,7 @@ public class CommandLineModuleTransform : MonoBehaviour, ICommandLineModule {
                 break;
             case "rotation":
             case "setrotation":
-                GameObject.Find(args[2]).transform.rotation = new Quaternion(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]), float.Parse(args[6]));
+                GameObject.Find(args[2]).transform.eulerAngles = new Vector3(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));
                 break;
             case "rotate":
                 GameObject.Find(args[2]).transform.Rotate(float.Parse(args[3]), float.Parse(args[4]), float.Parse(args[5]));

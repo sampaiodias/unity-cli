@@ -29,6 +29,8 @@ public class CommandLineCore : MonoBehaviour {
     public bool showFocusedModule = true;
     [Tooltip("When CLIU initializes, the module speficied will be automatically focused. Leave empty if you don't want the automatic focus to happen.")]
     public string focusByDefault = "";
+    [Tooltip("If enabled, CLIU will NEVER be able to remove the focus from a module.")]
+    public bool preventUnfocus = false;
 
     [HideInInspector]
     public Vector3 initPos;
@@ -120,7 +122,7 @@ public class CommandLineCore : MonoBehaviour {
                 {
                     SetFocus(args[1].ToLower());
                 }
-                else
+                else if (!preventUnfocus)
                 {
                     RemoveFocus();
                 }                
@@ -157,7 +159,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            Print("help: show this message\nmodules: List the code of all the modules running\nhelp moduleCode: show the help message of the module specified\nhide: Hide the CLIU window\nexit: Exit the entire application/game\nclear: Clear all the text on the output\nreset: Returns the CLIU window to its initial position\nfocus moduleCode: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return the normal CLIU behaviour.");
+            Print("help: show this message\nmodules: List the code of all the modules running\nhelp moduleCode: show the help message of the module specified\nhide: Hide the CLIU window\nexit: Exit the entire application/game\nclear: Clear all the text on the output\nreset: Returns the CLIU window to its initial position\nfocus moduleCode: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return to the normal CLIU behaviour.");
             Print("Be sure to check the documentation PDF if you need more help.");
         }
     }    
