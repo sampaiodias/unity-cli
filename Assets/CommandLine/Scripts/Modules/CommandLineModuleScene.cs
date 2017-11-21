@@ -2,51 +2,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
+public class CommandLineModuleScene : CommandLineModule {
 
-    public void Execute(string[] args)
+    private void Start()
     {
-        try
-        {
-            switch (args[1].ToLower())
-            {
-                case "loadscene":
-                    try
-                    {
-                        int sceneToLoad = int.Parse(args[2]);
-                        SceneManager.LoadScene(sceneToLoad);
-                    }
-                    catch (System.Exception)
-                    {
-                        SceneManager.LoadScene(args[2]);
-                    }
-                    break;
-                case "reloadscene":
-                    ReloadScene();
-                    break;
-                case "loadnextscene":
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                    break;
-                case "loadpreviousscene":
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-                    break;
-                case "sceneindex":
-                    CommandLineCore.Print("Current scene index: " + SceneManager.GetActiveScene().buildIndex);
-                    break;
-                case "help":
-                case "h":
-                case "-h":
-                    Help();
-                    break;
-            }
-        }
-        catch (System.Exception e)
-        {
-            CommandLineCore.PrintError(e.ToString());
-        }
+        commands.Add("loadscene", LoadScene);
+        commands.Add("reloadscene", ReloadScene);
+        commands.Add("loadnextscene", LoadNextScene);
+        commands.Add("loadprevoiusscene", LoadPreviousScene);
+        commands.Add("sceneindex", SceneIndex);
     }
 
-    public void Help()
+    public override void Help()
     {
         StringBuilder helpMessage = new StringBuilder();
 
@@ -59,8 +26,36 @@ public class CommandLineModuleScene : MonoBehaviour, ICommandLineModule {
         CommandLineCore.Print(helpMessage.ToString());
     }
 
-    public void ReloadScene()
+    public void ReloadScene(string[] args)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadScene(string[] args)
+    {
+        try
+        {
+            int sceneToLoad = int.Parse(args[2]);
+            SceneManager.LoadScene(sceneToLoad);
+        }
+        catch (System.Exception)
+        {
+            SceneManager.LoadScene(args[2]);
+        }
+    }
+
+    public void LoadNextScene(string[] args)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadPreviousScene(string[] args)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void SceneIndex(string[] args)
+    {
+        CommandLineCore.Print("Current scene index: " + SceneManager.GetActiveScene().buildIndex);
     }
 }

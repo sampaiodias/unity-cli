@@ -1,62 +1,19 @@
 ﻿using System.Text;
 using UnityEngine;
 
-public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
+public class CommandLineModuleObjects : CommandLineModule {
 
-    public void Execute(string[] args)
+    private void Start()
     {
-        try
-        {
-            switch (args[1].ToLower())
-            {
-                case "callall":
-                    GameObject[] allObjectsOnScene = FindObjectsOfType<GameObject>();
-                    for (int i = 0; i < allObjectsOnScene.Length; i++)
-                    {
-                        try
-                        {
-                            allObjectsOnScene[i].SendMessage(args[2]);
-                        }
-                        catch (System.Exception)
-                        {
-                        }
-                    }
-                    break;
-                case "call":
-                    GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
-                    obj.SendMessage(args[2]);
-                    break;
-                case "calltag":
-                    GameObject objTag = GameObject.FindGameObjectWithTag(CommandLineCore.StringWithSpaces(args, 3));
-                    objTag.SendMessage(args[2]);
-                    break;
-                case "destroy":
-                    Destroy(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)));
-                    break;
-                case "destroytag":
-                    GameObject[] objsTag = (GameObject.FindGameObjectsWithTag(CommandLineCore.StringWithSpaces(args, 2)));
-                    foreach (var item in objsTag)
-                    {
-                        Destroy(item);
-                    }
-                    break;
-                case "instantiate":
-                    UnityEditor.PrefabUtility.InstantiatePrefab(Resources.Load(CommandLineCore.StringWithSpaces(args, 2)));
-                    break;
-                case "help":
-                case "h":
-                case "-h":
-                    Help();
-                    break;
-            }
-        }
-        catch (System.Exception e)
-        {
-            CommandLineCore.PrintError(e.ToString());
-        }
+        commands.Add("call", Call);
+        commands.Add("callall", CallAll);
+        commands.Add("callbytag", CallTag);
+        commands.Add("destroy", DestroyObj);
+        commands.Add("destroytag", DestroyTag);
+        commands.Add("instantiate", InstantiateObj);
     }
 
-    public void Help()
+    public override void Help()
     {
         StringBuilder helpMessage = new StringBuilder();
 
@@ -68,5 +25,50 @@ public class CommandLineModuleObjects : MonoBehaviour, ICommandLineModule {
         helpMessage.Append("instantiate string:pathInAResourcesFolder");
 
         CommandLineCore.Print(helpMessage.ToString());
+    }
+
+    public void CallAll(string[] args)
+    {
+        GameObject[] allObjectsOnScene = FindObjectsOfType<GameObject>();
+        for (int i = 0; i < allObjectsOnScene.Length; i++)
+        {
+            try
+            {
+                allObjectsOnScene[i].SendMessage(args[2]);
+            }
+            catch (System.Exception)
+            {
+            }
+        }
+    }
+
+    public void Call(string[] args)
+    {
+        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
+        obj.SendMessage(args[2]);
+    }
+
+    public void CallTag(string[] args)
+    {
+        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
+        obj.SendMessage(args[2]);
+    }
+
+    public void DestroyObj(string[] args)
+    {
+        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
+        obj.SendMessage(args[2]);
+    }
+
+    public void DestroyTag(string[] args)
+    {
+        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
+        obj.SendMessage(args[2]);
+    }
+
+    public void InstantiateObj(string[] args)
+    {
+        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
+        obj.SendMessage(args[2]);
     }
 }

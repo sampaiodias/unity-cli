@@ -1,53 +1,21 @@
 using System.Text;
 using UnityEngine;
 
-public class CommandLineModulePlayerPrefs : MonoBehaviour, ICommandLineModule {
-    public void Execute(string[] args)
+public class CommandLineModulePlayerPrefs : CommandLineModule {
+
+    private void Start()
     {
-        try
-        {
-            switch (args[1].ToLower())
-            {
-                case "getint":
-                    CommandLineCore.Print(PlayerPrefs.GetInt(CommandLineCore.StringWithSpaces(args, 2)).ToString());
-                    break;
-                case "getfloat":
-                    CommandLineCore.Print(PlayerPrefs.GetFloat(CommandLineCore.StringWithSpaces(args, 2)).ToString());
-                    break;
-                case "getstring":
-                    CommandLineCore.Print(PlayerPrefs.GetString(CommandLineCore.StringWithSpaces(args, 2)));
-                    break;
-                case "setint":
-                    PlayerPrefs.SetInt(CommandLineCore.StringWithPipes(args[2]), int.Parse(args[3]));
-                    break;
-                case "setfloat":
-                    PlayerPrefs.SetFloat(CommandLineCore.StringWithPipes(args[2]), float.Parse(args[3]));
-                    break;
-                case "setstring":
-                    PlayerPrefs.SetString(CommandLineCore.StringWithPipes(args[2]), CommandLineCore.StringWithSpaces(args, 3));
-                    break;
-                case "saveprefs":
-                    PlayerPrefs.Save();
-                    CommandLineCore.PrintSuccess("PlayerPrefs successfully saved!");
-                    break;
-                case "deleteallprefs":
-                    PlayerPrefs.DeleteAll();
-                    CommandLineCore.PrintSuccess("All PlayerPrefs were successfully deleted!");
-                    break;
-                case "help":
-                case "h":
-                case "-h":
-                    Help();
-                    break;
-            }
-        }
-        catch (System.Exception e)
-        {
-            CommandLineCore.PrintError(e.ToString());
-        }
+        commands.Add("getint", GetInt);
+        commands.Add("getfloat", GetFloat);
+        commands.Add("getstring", GetString);
+        commands.Add("setint", SetInt);
+        commands.Add("setfloat", SetFloat);
+        commands.Add("setstring", SetString);
+        commands.Add("saveprefs", SaveAll);
+        commands.Add("deleteallprefs", DeleteAll);
     }
 
-    public void Help()
+    public override void Help()
     {
         StringBuilder helpMessage = new StringBuilder();
 
@@ -61,6 +29,48 @@ public class CommandLineModulePlayerPrefs : MonoBehaviour, ICommandLineModule {
         helpMessage.Append("deleteallprefs");
 
         CommandLineCore.Print(helpMessage.ToString());
+    }
+
+    private void SetInt(string[] args)
+    {
+        PlayerPrefs.SetFloat(CommandLineCore.StringWithPipes(args[2]), int.Parse(args[3]));
+    }
+
+    private void SetFloat(string[] args)
+    {
+        PlayerPrefs.SetFloat(CommandLineCore.StringWithPipes(args[2]), float.Parse(args[3]));
+    }
+
+    private void SetString(string[] args)
+    {
+        PlayerPrefs.SetString(CommandLineCore.StringWithPipes(args[2]), CommandLineCore.StringWithSpaces(args, 3));
+    }
+
+    private void GetInt(string[] args)
+    {
+        CommandLineCore.Print(PlayerPrefs.GetInt(CommandLineCore.StringWithSpaces(args, 2)).ToString());
+    }
+
+    private void GetFloat(string[] args)
+    {
+        CommandLineCore.Print(PlayerPrefs.GetFloat(CommandLineCore.StringWithSpaces(args, 2)).ToString());
+    }
+
+    private void GetString(string[] args)
+    {
+        CommandLineCore.Print(PlayerPrefs.GetString(CommandLineCore.StringWithSpaces(args, 2)));
+    }
+
+    private void SaveAll(string[] args)
+    {
+        PlayerPrefs.Save();
+        CommandLineCore.PrintSuccess("PlayerPrefs successfully saved!");
+    }
+
+    private void DeleteAll(string[] args)
+    {
+        PlayerPrefs.DeleteAll();
+        CommandLineCore.PrintSuccess("All PlayerPrefs were successfully deleted!");
     }
 }
 

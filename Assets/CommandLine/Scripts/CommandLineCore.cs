@@ -41,7 +41,7 @@ public class CommandLineCore : MonoBehaviour {
     private GameObject modulesParent;
     private GameObject window;
     private CommandLineInputField inputField;
-    private GameObject[] commandLineModules;
+    private CommandLineModule[] commandLineModules;
     private List<CommandLineModuleSettings> moduleSettings;
     private List<string> moduleNames = new List<string>();
     private GameObject buttonOpenWindow;
@@ -158,14 +158,7 @@ public class CommandLineCore : MonoBehaviour {
     {
         if (args.Length > 1)
         {
-            for (int i = 0; i < commandLineModules.Length; i++)
-            {
-                if (moduleNames.Contains(args[1].ToLower()))
-                {
-                    SendCommandTo(args[1].ToLower(), "Help", args);
-                    i = commandLineModules.Length;
-                }                
-            }
+            SendCommandTo(args[1].ToLower(), "help", args);
         }
         else
         {
@@ -254,6 +247,25 @@ public class CommandLineCore : MonoBehaviour {
         return newKey;
     }
 
+    /// <summary>
+    /// Reset all settings to the their default values
+    /// </summary>
+    public void ResetSettings()
+    {
+        openWindowHotkey = "]";
+        closeWindowHotkey = "escape";
+        startHidden = true;
+        hideOpenWindowButton = false;
+        draggableWindow = true;
+        resetWindowHotkey = "";
+        destroyOnSceneLoad = false;
+        noGUI = false;
+        noGUIOutsideUnity = false;
+        showFocusedModule = true;
+        focusByDefault = "";
+        preventUnfocus = false;
+    }
+
     private void ShowModulesLoaded()
     {
         StringBuilder builder = new StringBuilder();
@@ -287,7 +299,7 @@ public class CommandLineCore : MonoBehaviour {
 
         for (int i = 0; i < commandLineModules.Length; i++)
         {
-            commandLineModules[i].SendMessage(command, modifiedArgs);
+            commandLineModules[i].Execute(modifiedArgs);
         }
     }
 
@@ -297,7 +309,7 @@ public class CommandLineCore : MonoBehaviour {
         {
             if (moduleNames[i] == moduleName)
             {
-                commandLineModules[i].SendMessage(command, args);
+                commandLineModules[i].Execute(args);
                 i = commandLineModules.Length;
             }
         }
@@ -325,13 +337,14 @@ public class CommandLineCore : MonoBehaviour {
         try
         {
             Object[] modules = Resources.LoadAll("Modules");
-            commandLineModules = new GameObject[modules.Length];
+            commandLineModules = new CommandLineModule[modules.Length];
             moduleSettings = new List<CommandLineModuleSettings>();
             modulesParent = transform.Find("CLIU-Modules").gameObject;
 
             for (int i = 0; i < modules.Length; i++)
             {
-                commandLineModules[i] = (GameObject)Instantiate(modules[i], modulesParent.transform);
+                GameObject moduleObj = (GameObject)Instantiate(modules[i], modulesParent.transform);
+                commandLineModules[i] = moduleObj.GetComponent<CommandLineModule>();
             }
 
             for (int i = 0; i < commandLineModules.Length; i++)
@@ -405,21 +418,5 @@ public class CommandLineCore : MonoBehaviour {
     {
         focusedModule = "";
         placeholderText.text = initialPlaceholderText;
-    }
-
-    public void ResetSettings()
-    {
-        openWindowHotkey = "]";
-        closeWindowHotkey = "escape";
-        startHidden = true;
-        hideOpenWindowButton = false;
-        draggableWindow = true;
-        resetWindowHotkey = "";
-        destroyOnSceneLoad = false;
-        noGUI = false;
-        noGUIOutsideUnity = false;
-        showFocusedModule = true;
-        focusByDefault = "";
-        preventUnfocus = false;
     }
 }

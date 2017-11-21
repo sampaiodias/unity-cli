@@ -2,43 +2,20 @@
 using System.Text;
 using UnityEngine;
 
-public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
+public class CommandLineModuleTime : CommandLineModule {
 
-    public void Execute(string[] args)
+    private void Start()
     {
-        try
-        {
-            switch (args[1].ToLower())
-            {
-                case "timescale":
-                    TimeScale(args[2]);
-                    break;
-                case "slowmo":
-                case "slomo":
-                case "slowmotion":
-                    SlowMo(args[2], args[3]);
-                    break;
-                case "devicetime":
-                    DeviceTime();
-                    break;
-                case "currenttimescale":
-                case "currentts":
-                    CommandLineCore.Print("Current TimeScale: " + Time.timeScale);
-                    break;
-                case "help":
-                case "h":
-                case "-h":
-                    Help();
-                    break;
-            }
-        }
-        catch (System.Exception e)
-        {
-            CommandLineCore.PrintError(e.ToString());
-        }
+        commands.Add("timescale", TimeScale);
+        commands.Add("slowmo", SlowMo);
+        commands.Add("slomo", SlowMo);
+        commands.Add("slowmotion", SlowMo);
+        commands.Add("devicetime", DeviceTime);
+        commands.Add("currenttimescale", CurrentTimeScale);
+        commands.Add("currentts", CurrentTimeScale);
     }
 
-    public void Help()
+    public override void Help()
     {
         StringBuilder helpMessage = new StringBuilder();
 
@@ -50,14 +27,17 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
         CommandLineCore.Print(helpMessage.ToString());
     }
 
-    private void TimeScale(string amount)
+    private void TimeScale(string[] args)
     {
+        string amount = args[2];
         Time.timeScale = float.Parse(amount);
         CommandLineCore.Print("TimeScale set to " + Time.timeScale);
     }
 
-    private void SlowMo(string amount, string duration)
+    private void SlowMo(string[] args)
     {
+        string amount = args[2];
+        string duration = args[3];
         StartCoroutine(ActivateSlowMo(float.Parse(amount), float.Parse(duration)));
     }
 
@@ -69,8 +49,13 @@ public class CommandLineModuleTime : MonoBehaviour, ICommandLineModule {
         Time.timeScale = previousTimeScale;
     }
 
-    private void DeviceTime()
+    private void DeviceTime(string[] args)
     {
         CommandLineCore.Print(System.DateTime.Now.ToString());
+    }
+
+    private void CurrentTimeScale(string[] args)
+    {
+        CommandLineCore.Print("Current TimeScale: " + Time.timeScale);
     }
 }

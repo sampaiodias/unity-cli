@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script manages the output text for the CLIU window.
@@ -8,11 +9,10 @@ using UnityEngine;
 public class CommandLineOutputText : MonoBehaviour {
 
     public RectTransform output;
-    float offset = 10;
-    float initPoxY;
+    //float initPoxY;
 
-	void Start () {
-        initPoxY = output.position.y;
+	void Awake () {
+        //initPoxY = output.offsetMax.y;
 	}
 
     private void Update()
@@ -20,11 +20,15 @@ public class CommandLineOutputText : MonoBehaviour {
         ChangePosition();
     }
 
-    private void ChangePosition()
+    public void ChangePosition()
     {
-        if (initPoxY == output.position.y)
+        //if (initPoxY == output.offsetMax.y)
+        //{
+        //    output.offsetMax += new Vector2(0, offset);
+        //}
+        if (output.offsetMin.y >= 0)
         {
-            output.position += new Vector3(0, offset, 0);
+            output.offsetMin = new Vector2(output.offsetMin.x, 4);
         }
     }
 }

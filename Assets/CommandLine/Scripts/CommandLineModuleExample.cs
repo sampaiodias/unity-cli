@@ -4,40 +4,35 @@ using System.Text;
 /// <summary>
 /// If for some reason the Module Builder fails to build the script file, copy the contents of this file into a new script file.
 /// </summary>
-public class CommandLineModuleExample : MonoBehaviour, ICommandLineModule {
-    public void Execute(string[] args)
+public class CommandLineModuleExample : CommandLineModule {
+    void Start()
     {
-        try
-        {
-            switch (args[1].ToLower())
-            {
-                case "dosomething":
-                    Debug.Log("This module is printing " + args[1]);
-                    break;
-                case "dosomethingelse":
-                    Debug.Log("This module is printing " + args[1]);
-                    break;
-                case "help":
-                case "h":
-                case "-h":
-                    Help();
-                    break;
-            }
-        }
-        catch (System.Exception e)
-        {
-            CommandLineCore.PrintError(e.ToString());
-        }
+        commands.Add("example", SomeMethod); //The example command will call the SomeMethod method.
+        commands.Add("printargs", PrintArgs); //The printargs command will call the PrintArgs method.
     }
 
-    public void Help()
+    public override void Help()
     {
         StringBuilder helpMessage = new StringBuilder();
 
-        helpMessage.Append("dosomething string:messageToPrint\n");
-        helpMessage.Append("dosomethingelse");
+        helpMessage.AppendLine("example");
+        helpMessage.Append("dosomethingelse string:messageToPrint");
 
         CommandLineCore.Print(helpMessage.ToString());
+    }
+
+    private void SomeMethod(string[] args)
+    {
+        Debug.Log("SomeMethod() was called");
+        CommandLineCore.Print("This is an example message.");
+    }
+
+    private void PrintArgs(string[] args)
+    {
+        foreach (var item in args)
+        {
+            CommandLineCore.Print(item);
+        }
     }
 }
 
