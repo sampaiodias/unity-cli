@@ -5,7 +5,7 @@ public class CommandLineEditorButtons : ScriptableObject {
 
     static GameObject cliuWindow;
 
-    [MenuItem("CLIU/Instantiate or Destroy CLIU &0")]
+    [MenuItem("Tools/CLIU/Instantiate or Destroy CLIU &0")]
     static void OpenCLIU()
     {
         if (cliuWindow == null)
@@ -31,7 +31,7 @@ public class CommandLineEditorButtons : ScriptableObject {
         }
     }
 
-    [MenuItem("CLIU/Instantiate or Destroy CLIU (Prefab Clone)")]
+    [MenuItem("Tools/CLIU/Instantiate or Destroy CLIU (Prefab Clone)")]
     static void OpenCLIUClone()
     {
         if (cliuWindow == null)

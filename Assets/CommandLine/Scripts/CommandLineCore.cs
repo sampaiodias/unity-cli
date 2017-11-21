@@ -25,9 +25,9 @@ public class CommandLineCore : MonoBehaviour {
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject.")]
     public bool destroyOnSceneLoad = false;    
     [Tooltip("If enabled, the GUI will NEVER appear on your game at all. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with the window hidden use RunCommand() via script.")]
-    public bool NoGUI = false;
+    public bool noGUI = false;
     [Tooltip("If enabled, the GUI will NEVER appear on your game builds, but will still appear while you are using Unity. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with the window hidden use RunCommand() via script.")]
-    public bool NoGUIOutsideUnity = false;
+    public bool noGUIOutsideUnity = false;
     [Tooltip("If disabled, the placeholder text for the input will NOT change while a module is on focus.")]
     public bool showFocusedModule = true;
     [Tooltip("When CLIU initializes, the module speficied will be automatically focused. Leave empty if you don't want the automatic focus to happen.")]
@@ -354,7 +354,7 @@ public class CommandLineCore : MonoBehaviour {
             SetFocus(focusedModule);
         }
 
-        if (NoGUI || (!Application.isEditor && NoGUIOutsideUnity))
+        if (noGUI || (!Application.isEditor && noGUIOutsideUnity))
         {
             GetComponent<Canvas>().enabled = false;
             openWindowHotkey = "";
@@ -397,7 +397,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            PrintError("Could not focus because the module not found!");
+            PrintError("Could not focus because the module was not found!");
         }
     }
 
@@ -405,5 +405,21 @@ public class CommandLineCore : MonoBehaviour {
     {
         focusedModule = "";
         placeholderText.text = initialPlaceholderText;
+    }
+
+    public void ResetSettings()
+    {
+        openWindowHotkey = "]";
+        closeWindowHotkey = "escape";
+        startHidden = true;
+        hideOpenWindowButton = false;
+        draggableWindow = true;
+        resetWindowHotkey = "";
+        destroyOnSceneLoad = false;
+        noGUI = false;
+        noGUIOutsideUnity = false;
+        showFocusedModule = true;
+        focusByDefault = "";
+        preventUnfocus = false;
     }
 }

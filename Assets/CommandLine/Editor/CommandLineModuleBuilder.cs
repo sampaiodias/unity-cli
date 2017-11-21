@@ -9,11 +9,11 @@ public class CommandLineModuleBuilder : EditorWindow {
     string moduleScriptName = "CommandLineModuleExampleName";
     Texture2D logo;
 
-    [MenuItem("CLIU/Module Builder")]
+    [MenuItem("Tools/CLIU/Module Builder")]
     public static void OpenModuleBuilder()
     {
         CommandLineModuleBuilder window = GetWindow<CommandLineModuleBuilder>("Module Builder");
-        window.minSize = new Vector2(415, 415);
+        window.minSize = new Vector2(415, 440);
     }
 
     private void OnEnable()
@@ -42,7 +42,8 @@ public class CommandLineModuleBuilder : EditorWindow {
             BuildModuleClass();
         }
         GUILayout.Space(20);
-        GUILayout.Label("Remember to attach the script created to the prefab of your module!", EditorStyles.centeredGreyMiniLabel);
+        EditorGUILayout.HelpBox("Remember to attach the script created to the prefab of your module!", MessageType.Info);
+        //GUILayout.Label("Remember to attach the script created to the prefab of your module!", EditorStyles.centeredGreyMiniLabel);
         GUILayout.Space(10);
         GUILayout.Label("Made by Lucas Sampaio Dias\n(lucassampaiodias@gmail.com)", EditorStyles.centeredGreyMiniLabel);
     }
