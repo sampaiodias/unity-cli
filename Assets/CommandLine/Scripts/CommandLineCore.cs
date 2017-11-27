@@ -105,6 +105,10 @@ public class CommandLineCore : MonoBehaviour {
                         SetFocus(args[1].ToLower());
                     }
                 }
+                else if (firstArg == "alpha")
+                {
+                    window.GetComponent<CanvasGroup>().alpha = float.Parse(args[1]);
+                }
 
                 //If it isn't a Core command, Core sends a command to the Execute() of a specific module. Example: "time help"
                 else if (args.Length > 1 && moduleNames.Contains(firstArg))
@@ -162,7 +166,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            Print("help: show this message\nmodules: List the code of all the modules running\nhelp moduleCode: show the help message of the module specified\nhide: Hide the CLIU window\nexit: Exit the entire application/game\nclear: Clear all the text on the output\nreset: Returns the CLIU window to its initial position\nfocus moduleCode: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return to the normal CLIU behaviour.");
+            Print("<b>help</b>: show this message\n<b>modules</b>: List the code of all the modules running\n<b>help moduleCode</b>: show the help message of the module specified\n<b>hide</b>: Hide the CLIU window\n<b>exit</b>: Exit the entire application/game\n<b>clear</b>: Clear all the text on the output\n<b>reset</b>: Returns the CLIU window to its initial position\n<b>focus moduleCode</b>: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return to the normal CLIU behaviour.\n<b>alpha value</b>: sets the transparency of the window");
             Print("Be sure to check the documentation PDF if you need more help.");
         }
     }    

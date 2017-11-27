@@ -50,25 +50,26 @@ public class CommandLineModuleObjects : CommandLineModule {
 
     public void CallTag(string[] args)
     {
-        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
-        obj.SendMessage(args[2]);
+        GameObject objTag = GameObject.FindGameObjectWithTag(CommandLineCore.StringWithSpaces(args, 3));
+        objTag.SendMessage(args[2]);
     }
 
     public void DestroyObj(string[] args)
     {
-        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
-        obj.SendMessage(args[2]);
+        Destroy(GameObject.Find(CommandLineCore.StringWithSpaces(args, 2)));
     }
 
     public void DestroyTag(string[] args)
     {
-        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
-        obj.SendMessage(args[2]);
+        GameObject[] objsTag = (GameObject.FindGameObjectsWithTag(CommandLineCore.StringWithSpaces(args, 2)));
+        foreach (var item in objsTag)
+        {
+            Destroy(item);
+        }
     }
 
     public void InstantiateObj(string[] args)
     {
-        GameObject obj = GameObject.Find(CommandLineCore.StringWithSpaces(args, 3));
-        obj.SendMessage(args[2]);
+        UnityEditor.PrefabUtility.InstantiatePrefab(Resources.Load(CommandLineCore.StringWithSpaces(args, 2)));
     }
 }
