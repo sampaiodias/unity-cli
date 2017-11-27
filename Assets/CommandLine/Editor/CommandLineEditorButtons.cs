@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class CommandLineEditorButtons : ScriptableObject {
+public class CommandLineEditorButtons : Editor {
 
     static GameObject cliuWindow;
+    static GameObject cliuFullscreen;
 
-    [MenuItem("Tools/CLIU/Instantiate or Destroy CLIU &0")]
+    [MenuItem("Tools/CLIU/Instantiate or Destroy CLIU")]
     static void OpenCLIU()
     {
+        cliuWindow = GameObject.Find("CLIU");
+
         if (cliuWindow == null)
         {
             cliuWindow = PrefabUtility.InstantiatePrefab(Resources.Load("CLIU")) as GameObject;
@@ -31,12 +34,14 @@ public class CommandLineEditorButtons : ScriptableObject {
         }
     }
 
-    [MenuItem("Tools/CLIU/Instantiate or Destroy CLIU (Prefab Clone)")]
-    static void OpenCLIUClone()
+    [MenuItem("Tools/CLIU/Instantiate or Destroy CLIU (Fullscreen)")]
+    static void OpenCLIUFullscreen()
     {
-        if (cliuWindow == null)
+        cliuFullscreen = GameObject.Find("CLIU (Fullscreen)");
+
+        if (cliuFullscreen == null)
         {
-            cliuWindow = Instantiate(Resources.Load("CLIU")) as GameObject;
+            cliuFullscreen = PrefabUtility.InstantiatePrefab(Resources.Load("CLIU (Fullscreen)")) as GameObject;
         }
         else
         {
@@ -44,16 +49,16 @@ public class CommandLineEditorButtons : ScriptableObject {
             {
                 if (EditorApplication.isPlaying)
                 {
-                    Destroy(cliuWindow);
+                    Destroy(cliuFullscreen);
                 }
                 else
                 {
-                    DestroyImmediate(cliuWindow);
+                    DestroyImmediate(cliuFullscreen);
                 }
-                
-                cliuWindow = null;
+
+                cliuFullscreen = null;
             }
-            catch (System.Exception) { }            
+            catch (System.Exception) { }
         }
     }
 }

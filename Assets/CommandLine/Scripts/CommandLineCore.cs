@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class CommandLineCore : MonoBehaviour {
 
+#region Settings
     [Header("Basic Settings")]
     [Tooltip("Leave empty if you don't want a hotkey.")]
     public string openWindowHotkey = "]";
@@ -34,6 +35,7 @@ public class CommandLineCore : MonoBehaviour {
     public string focusByDefault = "";
     [Tooltip("If enabled, CLIU will NEVER be able to remove the focus from a module.")]
     public bool preventUnfocus = false;
+#endregion
 
     [HideInInspector]
     public Vector3 initPos;
