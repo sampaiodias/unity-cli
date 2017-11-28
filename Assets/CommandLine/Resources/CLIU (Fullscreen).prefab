@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 114111616316276054}
   - component: {fileID: 114952954398879556}
   m_Layer: 5
-  m_Name: CLIU (FullScreen)
+  m_Name: CLIU (Fullscreen)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
