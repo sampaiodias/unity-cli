@@ -53,9 +53,8 @@ public class CommandLineModuleBuilder : EditorWindow {
         GameObject module = new GameObject(moduleName);
         CommandLineModuleSettings settings = module.AddComponent<CommandLineModuleSettings>();
         settings.moduleInternalCode = moduleCode;
-        PrefabUtility.CreatePrefab("Assets/CommandLine/Resources/Modules/" + moduleName + ".prefab", module);
+        PrefabUtility.CreatePrefab("Assets/Plugins/CLIU/Resources/CLIU Modules/" + moduleName + ".prefab", module);
         DestroyImmediate(module);
-        Debug.Log("Module prefab built successfully at \"/CommandLine/Resources/Modules/\"");
     }
 
     string BuildModuleClass()
@@ -66,7 +65,7 @@ public class CommandLineModuleBuilder : EditorWindow {
         string copyPath = "/CommandLine/Scripts/Modules";
 
         if(File.Exists(copyPath) == false){
-            using (StreamWriter outfile = new StreamWriter("Assets/CommandLine/Scripts/Modules/" + name + ".cs"))
+            using (StreamWriter outfile = new StreamWriter("Assets/Plugins/CLIU/Scripts/Modules/" + name + ".cs"))
             {
                 outfile.WriteLine("using UnityEngine;");
                 outfile.WriteLine("using System.Text;");

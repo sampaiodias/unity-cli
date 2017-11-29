@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// This is the core (or brain) of CLIU. This is also the class which you should use for public methods like Print()
+/// This is the core (or brain) of CLIU. This is also the class which you should use for public methods like Print().
 /// </summary>
 public class CommandLineCore : MonoBehaviour {
 
@@ -342,7 +342,7 @@ public class CommandLineCore : MonoBehaviour {
     {
         try
         {
-            Object[] modules = Resources.LoadAll("Modules");
+            Object[] modules = Resources.LoadAll("CLIU Modules");
             commandLineModules = new CommandLineModule[modules.Length];
             moduleSettings = new List<CommandLineModuleSettings>();
             modulesParent = transform.Find("CLIU-Modules").gameObject;
