@@ -45,7 +45,10 @@ public class CommandLineInputField : MonoBehaviour {
 
     private void OnEnable()
     {
-        inputField.ActivateInputField();
+        if (!Application.isMobilePlatform)
+        {
+            inputField.ActivateInputField();
+        }        
     }
 
     void Update () {
