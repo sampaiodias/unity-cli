@@ -801,7 +801,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>CLIU - Command Line Interface for Unity</b>
+  m_Text: CLIU - Command Line Interface for Unity
 --- !u!114 &114205923561832524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -902,8 +902,8 @@ MonoBehaviour:
   draggableWindow: 1
   resetWindowHotkey: 
   destroyOnSceneLoad: 0
-  NoGUI: 0
-  NoGUIOutsideUnity: 0
+  noGUI: 0
+  noGUIOutsideUnity: 0
   showFocusedModule: 1
   focusByDefault: 
   preventUnfocus: 0

@@ -168,7 +168,7 @@ public class CommandLineCore : MonoBehaviour {
         }
         else
         {
-            Print("<b>help</b>: show this message\n<b>modules</b>: List the code of all the modules running\n<b>help moduleCode</b>: show the help message of the module specified\n<b>hide</b>: Hide the CLIU window\n<b>exit</b>: Exit the entire application/game\n<b>clear</b>: Clear all the text on the output\n<b>reset</b>: Returns the CLIU window to its initial position\n<b>focus moduleCode</b>: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return to the normal CLIU behaviour.\n<b>alpha value</b>: sets the transparency of the window");
+            Print("help: show this message\nmodules: List the code of all the modules running\nhelp moduleCode: show the help message of the module specified\nhide: Hide the CLIU window\nexit: Exit the entire application/game\nclear: Clear all the text on the output\nreset: Returns the CLIU window to its initial position\nfocus moduleCode: specify a module so only its commands can be executed (even Core commands won’t run). Enter focus again to return to the normal CLIU behaviour.\nalpha value: sets the transparency of the window");
             Print("Be sure to check the documentation PDF if you need more help.");
         }
     }    

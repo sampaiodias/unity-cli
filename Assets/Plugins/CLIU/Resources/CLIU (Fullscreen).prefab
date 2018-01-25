@@ -1286,7 +1286,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>CLIU - Command Line Interface for Unity</b>
+  m_Text: CLIU - Command Line Interface for Unity
 --- !u!114 &114902809284539622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1962,7 +1962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.572, y: -11.428001}
+  m_AnchoredPosition: {x: -7.5720215, y: -11.428001}
   m_SizeDelta: {x: 15.467, y: 23.364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224819710668393352
