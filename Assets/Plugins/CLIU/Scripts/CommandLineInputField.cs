@@ -28,16 +28,27 @@ public class CommandLineInputField : MonoBehaviour {
 
         inputField.onEndEdit.AddListener(val =>
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Application.isMobilePlatform)
+            {
                 SendCommandToCore();
+            }
+            else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                SendCommandToCore();
+                inputField.ActivateInputField();
+            }                
         });
 
         previousCommands = new List<string>();
         cliCore.initPos = transform.parent.position;
     }
 
-    void Update () {
+    private void OnEnable()
+    {
         inputField.ActivateInputField();
+    }
+
+    void Update () {
         if (!caretFound)
         {
             caret = GameObject.Find("CLIU-InputField Input Caret");
@@ -50,7 +61,6 @@ public class CommandLineInputField : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //int caretPos = inputField.caretPosition;
             commandPos--;
             if (commandPos < 0)
             {
@@ -72,7 +82,6 @@ public class CommandLineInputField : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //int caretPos = inputField.caretPosition;
             commandPos++;
 
             if (commandPos > previousCommands.Count - 1)

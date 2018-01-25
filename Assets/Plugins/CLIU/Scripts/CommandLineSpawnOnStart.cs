@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// This is used to spawn a prefab on Start(). You might want to use this script to instantiate CLIU (read the documentation PDF for more information, section "Getting Started".
@@ -10,6 +9,6 @@ public class CommandLineSpawnOnStart : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PrefabUtility.InstantiatePrefab(prefab);
+        Instantiate(prefab);
 	}
 }

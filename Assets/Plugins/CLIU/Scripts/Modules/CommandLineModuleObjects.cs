@@ -70,6 +70,8 @@ public class CommandLineModuleObjects : CommandLineModule {
 
     public void InstantiateObj(string[] args)
     {
+#if UNITY_EDITOR
         UnityEditor.PrefabUtility.InstantiatePrefab(Resources.Load(CommandLineCore.StringWithSpaces(args, 2)));
+#endif
     }
 }
