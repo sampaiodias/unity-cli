@@ -33,7 +33,7 @@ public class CommandLineModulePlayerPrefs : CommandLineModule {
 
     private void SetInt(string[] args)
     {
-        PlayerPrefs.SetFloat(CommandLineCore.StringWithPipes(args[2]), int.Parse(args[3]));
+        PlayerPrefs.SetInt(CommandLineCore.StringWithPipes(args[2]), int.Parse(args[3]));
     }
 
     private void SetFloat(string[] args)
@@ -43,22 +43,22 @@ public class CommandLineModulePlayerPrefs : CommandLineModule {
 
     private void SetString(string[] args)
     {
-        PlayerPrefs.SetString(CommandLineCore.StringWithPipes(args[2]), CommandLineCore.StringWithSpaces(args, 3));
+        PlayerPrefs.SetString(CommandLineCore.StringWithPipes(args[2]), CommandLineCore.StringWithPipes(args[3]));
     }
 
     private void GetInt(string[] args)
     {
-        CommandLineCore.Print(PlayerPrefs.GetInt(CommandLineCore.StringWithSpaces(args, 2)).ToString());
+        CommandLineCore.Print(PlayerPrefs.GetInt(CommandLineCore.StringWithPipes(args[2])).ToString());
     }
 
     private void GetFloat(string[] args)
     {
-        CommandLineCore.Print(PlayerPrefs.GetFloat(CommandLineCore.StringWithSpaces(args, 2)).ToString());
+        CommandLineCore.Print(PlayerPrefs.GetFloat(CommandLineCore.StringWithPipes(args[2])).ToString());
     }
 
     private void GetString(string[] args)
     {
-        CommandLineCore.Print(PlayerPrefs.GetString(CommandLineCore.StringWithSpaces(args, 2)));
+        CommandLineCore.Print(PlayerPrefs.GetString(CommandLineCore.StringWithPipes(args[2])));
     }
 
     private void SaveAll(string[] args)
