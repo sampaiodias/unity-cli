@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This is the core (or brain) of CLIU. This is also the class which you should use for public methods like Print().
 /// </summary>
+[ExecuteInEditMode]
 public class CommandLineCore : MonoBehaviour {
 
 #region Settings
@@ -14,8 +15,13 @@ public class CommandLineCore : MonoBehaviour {
     public string openWindowHotkey = "]";
     [Tooltip("Leave empty if you don't want a hotkey.")]
     public string closeWindowHotkey = "escape";
+    [Tooltip("The transparency of the CLIU window.")]
+    [Range(0, 1)]
+    public float defaultOpacity = 1;
     [Tooltip("If enabled, the CLIU Window will automatically close when the game starts.")]
     public bool startHidden = true;
+    [Tooltip("If enabled, the CLIU Window will NOT appear while the game is not running.")]
+    public bool hideIfNotRunning = false;
     [Tooltip("If enabled, the 'Open CLIU' button will never appear on the screen.")]
     public bool hideOpenWindowButton = false;
     [Tooltip("If enabled, you'll be able to drag the CLIU Window around by holding the white bar.")]
@@ -51,12 +57,16 @@ public class CommandLineCore : MonoBehaviour {
     private Text placeholderText;
     private string initialPlaceholderText;
     private string focusedModule = "";
+    private CanvasGroup canvasGroup;
 
     private void Start()
     {
-        InitiateCore();
-        InitiateModules();
-        SettingBasedProcedures();
+        if (Application.isPlaying)
+        {
+            InitiateCore();
+            InitiateModules();
+            SettingBasedProcedures();
+        }        
     }
 
     /// <summary>
@@ -261,6 +271,8 @@ public class CommandLineCore : MonoBehaviour {
         openWindowHotkey = "]";
         closeWindowHotkey = "escape";
         startHidden = true;
+        defaultOpacity = 1;
+        hideIfNotRunning = false;
         hideOpenWindowButton = false;
         draggableWindow = true;
         resetWindowHotkey = "";
@@ -331,6 +343,7 @@ public class CommandLineCore : MonoBehaviour {
             inputField = FindObjectOfType<CommandLineInputField>();
             placeholderText = GameObject.Find("CLIU-InputPlaceholderText").GetComponent<Text>();
             initialPlaceholderText = placeholderText.text;
+            canvasGroup = GetComponent<CanvasGroup>();
         }
         catch (System.Exception e)
         {
@@ -385,6 +398,9 @@ public class CommandLineCore : MonoBehaviour {
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        canvasGroup.alpha = defaultOpacity;
+
         if (startHidden)
         {
             window.SetActive(false);
@@ -425,4 +441,33 @@ public class CommandLineCore : MonoBehaviour {
         focusedModule = "";
         placeholderText.text = initialPlaceholderText;
     }
+
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        UnityEditor.EditorApplication.update += HideIfNotRunning;
+    }
+
+    private void OnDisable()
+    {
+        UnityEditor.EditorApplication.update -= HideIfNotRunning;
+    }
+
+    private void HideIfNotRunning()
+    {
+        if (!Application.isPlaying)
+        {
+            if (hideIfNotRunning)
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+                canvasGroup.alpha = 0;
+            }
+            else
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+                canvasGroup.alpha = defaultOpacity;
+            }
+        }
+    }
+#endif
 }
