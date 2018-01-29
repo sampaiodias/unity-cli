@@ -23,7 +23,11 @@ public class CommandLineModuleBuilder : EditorWindow {
 
     void OnGUI()
     {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
         GUILayout.Label(logo);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
         GUILayout.Label("Prefab Builder", EditorStyles.largeLabel);
         GUILayout.Space(10);
         moduleName = EditorGUILayout.TextField("Module Name:", moduleName);
@@ -43,7 +47,6 @@ public class CommandLineModuleBuilder : EditorWindow {
         }
         GUILayout.Space(20);
         EditorGUILayout.HelpBox("Remember to attach the script created to the prefab of your module!", MessageType.Info);
-        //GUILayout.Label("Remember to attach the script created to the prefab of your module!", EditorStyles.centeredGreyMiniLabel);
         GUILayout.Space(10);
         GUILayout.Label("Made by Lucas Sampaio Dias\n(lucassampaiodias@gmail.com)", EditorStyles.centeredGreyMiniLabel);
     }

@@ -9,8 +9,13 @@ public class CommandLineCoreEditor : Editor {
 
     public override void OnInspectorGUI()
     {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
         logo = (Texture2D)Resources.Load("Textures/CLIU-Logo", typeof(Texture2D));
         GUILayout.Label(logo);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
         DrawDefaultInspector();
         GUILayout.Space(20);
         if (GUILayout.Button("Reset Settings") && EditorUtility.DisplayDialog("Reset Settings?", 
