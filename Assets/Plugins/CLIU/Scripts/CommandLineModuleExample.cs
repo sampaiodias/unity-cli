@@ -16,7 +16,7 @@ public class CommandLineModuleExample : CommandLineModule {
         StringBuilder helpMessage = new StringBuilder();
 
         helpMessage.AppendLine("example");
-        helpMessage.Append("dosomethingelse string:messageToPrint");
+        helpMessage.Append("printargs string:messageToPrint");
 
         CommandLineCore.Print(helpMessage.ToString());
     }

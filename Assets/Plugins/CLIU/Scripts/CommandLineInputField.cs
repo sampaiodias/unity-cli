@@ -18,7 +18,7 @@ public class CommandLineInputField : MonoBehaviour {
     bool caretFound = false;
     GameObject caret;
 
-    private void Start()
+    private void Awake()
     {
         EventSystem eventSystem = FindObjectOfType<EventSystem>();
         if (eventSystem == null)

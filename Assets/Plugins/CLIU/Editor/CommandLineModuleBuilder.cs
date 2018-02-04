@@ -85,7 +85,7 @@ public class CommandLineModuleBuilder : EditorWindow {
                 outfile.WriteLine("        StringBuilder helpMessage = new StringBuilder();");
                 outfile.WriteLine("");
                 outfile.WriteLine("        helpMessage.AppendLine(\"example\");");
-                outfile.WriteLine("        helpMessage.Append(\"dosomethingelse string:messageToPrint\");");
+                outfile.WriteLine("        helpMessage.Append(\"printargs string:messageToPrint\");");
                 outfile.WriteLine("");
                 outfile.WriteLine("        CommandLineCore.Print(helpMessage.ToString());");
                 outfile.WriteLine("    }");

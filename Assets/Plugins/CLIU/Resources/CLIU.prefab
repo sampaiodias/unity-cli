@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 223952043110873510}
   - component: {fileID: 114161336301618928}
   - component: {fileID: 114174458090667034}
+  - component: {fileID: 225685798616541844}
   - component: {fileID: 114323117001406808}
   m_Layer: 5
   m_Name: CLIU
@@ -897,7 +898,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openWindowHotkey: ']'
   closeWindowHotkey: escape
+  defaultOpacity: 1
   startHidden: 1
+  hideIfNotRunning: 0
   hideOpenWindowButton: 0
   draggableWindow: 1
   resetWindowHotkey: 
@@ -2054,6 +2057,17 @@ CanvasGroup:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329979942646760}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225685798616541844
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735349056300120}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
