@@ -13,6 +13,8 @@ public class CommandLineInputField : MonoBehaviour {
     public EventSystem myEventSystem;
     public ScrollRect scroll;
     public Text output;
+    [HideInInspector]
+    public bool newLine;
     private List<string> previousCommands;
     int commandPos = -1;
     bool caretFound = false;
@@ -134,12 +136,12 @@ public class CommandLineInputField : MonoBehaviour {
 
     public void PrintOutputOnView(string message)
     {
-        output.text = output.text + "\n" + message + "\n";
+        output.text = output.text + "\n" + message + (newLine ? "\n" : "");
     }
 
     public void PrintColoredOutputOnView(string message, string colorTag) //RichText tag, like <color=#008000ff>message</color>
     {
-        output.text = output.text + "\n<color=" + colorTag + ">" + message + "</color>\n";
+        output.text = output.text + "\n<color=" + colorTag + ">" + message + "</color>" + (newLine ? "\n" : "");
     }
 
     public void Clear()

@@ -30,7 +30,9 @@ public class CommandLineCore : MonoBehaviour {
     [Tooltip("Reset the CLIU window to its initial position. Leave empty if you don't want a hotkey.")]
     public string resetWindowHotkey = "";
     [Tooltip("If disabled, loading other scenes will NOT destroy the CLIU gameObject.")]
-    public bool destroyOnSceneLoad = false;    
+    public bool destroyOnSceneLoad = false;
+    [Tooltip("If enabled, logs (Debug.Log, Warnings, Errors, etc.) will be also printed on the CLIU window.")]
+    public bool printConsoleLogs = false;
     [Tooltip("If enabled, the GUI will NEVER appear on your game at all. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with the window hidden use RunCommand() via script.")]
     public bool noGUI = false;
     [Tooltip("If enabled, the GUI will NEVER appear on your game builds, but will still appear while you are using Unity. This setting overrides the 'Open Window Hotkey', 'Start Hidden' and 'Hide Open Window Button' settings.\n\nTo keep using CLIU with the window hidden use RunCommand() via script.")]
@@ -41,6 +43,8 @@ public class CommandLineCore : MonoBehaviour {
     public string focusByDefault = "";
     [Tooltip("If enabled, CLIU will NEVER be able to remove the focus from a module.")]
     public bool preventUnfocus = false;
+    [Tooltip("If enabled, an empty line will be printed at end of every output print on CLIU")]
+    public bool newLineAfterOutput = false;
 #endregion
 
     [HideInInspector]
@@ -66,7 +70,7 @@ public class CommandLineCore : MonoBehaviour {
             InitiateCore();
             InitiateModules();
             SettingBasedProcedures();
-        }        
+        }
     }
 
     /// <summary>
@@ -277,11 +281,13 @@ public class CommandLineCore : MonoBehaviour {
         draggableWindow = true;
         resetWindowHotkey = "";
         destroyOnSceneLoad = false;
+        printConsoleLogs = false;
         noGUI = false;
         noGUIOutsideUnity = false;
         showFocusedModule = true;
         focusByDefault = "";
         preventUnfocus = false;
+        newLineAfterOutput = false;
     }
 
     private void ShowModulesLoaded()
@@ -386,6 +392,15 @@ public class CommandLineCore : MonoBehaviour {
             SetFocus(focusedModule);
         }
 
+        if (printConsoleLogs)
+        {
+            if (Application.isPlaying)
+                Application.logMessageReceived += (message, stackTrace, type) =>
+                {
+                    PrintLog(message, stackTrace, type);
+                };
+        }
+
         if (noGUI || (!Application.isEditor && noGUIOutsideUnity))
         {
             GetComponent<Canvas>().enabled = false;
@@ -413,6 +428,8 @@ public class CommandLineCore : MonoBehaviour {
         {
             buttonOpenWindow.SetActive(false);
         }
+
+        inputField.newLine = newLineAfterOutput;
     }
 
     private void ResetWindow()
@@ -440,6 +457,23 @@ public class CommandLineCore : MonoBehaviour {
     {
         focusedModule = "";
         placeholderText.text = initialPlaceholderText;
+    }
+
+    private void PrintLog(string message, string stackTrace, LogType type)
+    {
+        switch (type)
+        {
+            case LogType.Error:
+            case LogType.Exception:
+                PrintError(message + "\n" + stackTrace);
+                break;
+            case LogType.Warning:
+                PrintWarning(message + "\n" + stackTrace);
+                break;
+            default:
+                Print(message);
+                break;
+        }
     }
 
 #if UNITY_EDITOR
