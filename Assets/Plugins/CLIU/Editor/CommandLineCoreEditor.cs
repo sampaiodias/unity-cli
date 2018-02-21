@@ -23,7 +23,9 @@ public class CommandLineCoreEditor : Editor {
         {
             try
             {
-                FindObjectOfType<CommandLineCore>().ResetSettings();
+                CommandLineCore core = FindObjectOfType<CommandLineCore>();
+                Undo.RecordObject(core, "CLIU Reset Settings");
+                core.ResetSettings();                
                 Debug.Log("CLIU settings were reset");
             }
             catch (System.Exception)
